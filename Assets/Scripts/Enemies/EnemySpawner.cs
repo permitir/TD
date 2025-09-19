@@ -75,8 +75,11 @@ public class EnemySpawner : MonoBehaviour
         //What happens once a wave starts
         yield return new WaitForSeconds(timeBtwWaves); //time for user to rest
 
-        if (currentWave > LevelManager.main.maxwave)
+
+        Debug.Log("Checking wave:" + currentWave + "vs maxwave:" + LevelManager.main.maxwave); // Checks if condition has been met to win
+        if (currentWave >= LevelManager.main.maxwave)
         {
+            Debug.Log("Win condition met");
             LevelManager.main.CheckWin(currentWave);
             yield break;
         }

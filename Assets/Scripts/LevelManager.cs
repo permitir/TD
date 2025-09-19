@@ -16,7 +16,7 @@ public class LevelManager : MonoBehaviour
     public int currency; //Currency to buy & upgrade turrets
     public int playerLives = 20;
     public int currentLives;
-    public int maxwave = 2;
+    public int maxwave;
 
     [Header("Game State")]
     public bool isGameOver = false; //tracks if player lost.
@@ -37,6 +37,7 @@ public class LevelManager : MonoBehaviour
     {
         currency = 150;
         currentLives = playerLives;
+        maxwave = 50;
     }
 
     public void WaveTextUI(int currentWave)
@@ -58,17 +59,21 @@ public class LevelManager : MonoBehaviour
 
     public void CheckWin(int currentWave)
     {
-        if (currentWave > maxwave && !isGameOver && !isGameWon)
+        if (currentWave >= maxwave && !isGameOver && !isGameWon)
         {
+            Debug.Log("Game Won!");
             Win();
+        }
+        else
+        {
+            Debug.Log("Victory has not been triggered");
         }
     }
 
     public void Win()
     {
         isGameWon = true;
-        isGameOver = true;
-        Debug.Log("Game Won!");
+        Debug.Log("Game Condition has been met to win.");
 
         Time.timeScale = 0f;
 

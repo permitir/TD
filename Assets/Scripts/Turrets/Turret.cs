@@ -146,7 +146,7 @@ public class Turret : MonoBehaviour
     private void OnDrawGizmosSelected()
     {
         //How I can see the turret/tower range
-        Handles.color = Color.magenta;
+        Handles.color = Color.green;
         Handles.DrawWireDisc(transform.position, transform.forward, targetingRange);
     }
     
