@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 86a1f3ee085439a43b263045f7ad4f99
+guid: ca3155a7d1ce5b148ae15881d03dc393
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 7054535758129077661
-    second: pause-button-png-favpng-r8xudH96Pvzxqnnt4g0FfF9gR_t_0
+      213: -8265633576875567539
+    second: Pause-Button-PNG_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -74,7 +74,7 @@ TextureImporter:
     buildTarget: DefaultTexturePlatform
     maxTextureSize: 2048
     resizeAlgorithm: 0
-    textureFormat: -1
+    textureFormat: 4
     textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: pause-button-png-favpng-r8xudH96Pvzxqnnt4g0FfF9gR_t_0
+      name: Pause-Button-PNG_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 290
-        height: 290
+        x: 53
+        y: 110
+        width: 754
+        height: 753
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: d9d139e35eeb6e160800000000000000
-      internalID: 7054535758129077661
+      spriteID: d465ac61e029a4d80800000000000000
+      internalID: -8265633576875567539
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      pause-button-png-favpng-r8xudH96Pvzxqnnt4g0FfF9gR_t_0: 7054535758129077661
+      Pause-Button-PNG_0: -8265633576875567539
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

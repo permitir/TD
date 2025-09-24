@@ -4815,6 +4815,7 @@ GameObject:
   - component: {fileID: 376182463}
   - component: {fileID: 376182464}
   - component: {fileID: 376182465}
+  - component: {fileID: 376182466}
   m_Layer: 0
   m_Name: LevelManager
   m_TagString: Untagged
@@ -4942,6 +4943,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a75b18a91892484386af032849982c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &376182466
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 376182460}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20b5d724388d8bd41ad8ea905ebfa909, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pausePanel: {fileID: 2099897137}
+  pauseButton: {fileID: 1315059945}
+  continueButton: {fileID: 1830891253}
+  menuButton: {fileID: 985178355}
 --- !u!4 &376410409 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1070057993442283535, guid: b188ecba7671c0447a7a69611bda5c0b, type: 3}
@@ -13379,7 +13396,7 @@ GameObject:
   - component: {fileID: 985178356}
   - component: {fileID: 985178355}
   m_Layer: 5
-  m_Name: Quit
+  m_Name: Menu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -17423,7 +17440,7 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 0.5019608}
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 0.5019608}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 0.5019608}
@@ -17466,7 +17483,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 7054535758129077661, guid: 86a1f3ee085439a43b263045f7ad4f99, type: 3}
+  m_Sprite: {fileID: -8265633576875567539, guid: ca3155a7d1ce5b148ae15881d03dc393, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
