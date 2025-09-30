@@ -26,6 +26,7 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private GameObject gameOverUI;
     [SerializeField] private GameObject gameWonUI;
     [SerializeField] private TextMeshProUGUI waveUI;
+    [SerializeField] private TextMeshProUGUI livesText;
 
 
     private void Awake()
@@ -38,11 +39,15 @@ public class LevelManager : MonoBehaviour
         currency = 150;
         currentLives = playerLives;
         maxwave = 50;
+        LivesTextUI();
     }
 
     public void WaveTextUI(int currentWave)
     {
-        waveUI.text = currentWave + "/" + maxwave;
+        if (waveUI != null)
+        {
+         waveUI.text = currentWave + "/" + maxwave;   
+        }
     }
 
     public void LoseLife()
@@ -54,6 +59,15 @@ public class LevelManager : MonoBehaviour
         if (currentLives <= 0)
         {
             GameOver();
+        }
+    }
+
+    public void LivesTextUI()
+    {
+        if (livesText != null)
+        {
+            Debug.Log("Worked");
+            livesText.text = playerLives + "/" + "20";   
         }
     }
 

@@ -5,6 +5,7 @@ public class MainMenu : MonoBehaviour
 {
     [SerializeField] private GameObject howToPlayPanel;
     [SerializeField] private GameObject mainMenu;
+    [SerializeField] private GameObject quitButton;
 
     public void PlayGame()
     {
