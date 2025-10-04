@@ -2,7 +2,6 @@ using System;
 using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 public class LevelManager : MonoBehaviour
 {
@@ -55,6 +54,7 @@ public class LevelManager : MonoBehaviour
         if (isGameOver) return;
 
         currentLives--;
+        LivesTextUI();
 
         if (currentLives <= 0)
         {
@@ -66,8 +66,7 @@ public class LevelManager : MonoBehaviour
     {
         if (livesText != null)
         {
-            Debug.Log("Worked");
-            livesText.text = playerLives + "/" + "20";   
+            livesText.text = currentLives + "/" + "20";   
         }
     }
 
