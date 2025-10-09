@@ -2,9 +2,6 @@ using UnityEngine;
 
 public class MainMenuManager : MonoBehaviour
 {
-    private bool isPaused = false;
-
-
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.M))
