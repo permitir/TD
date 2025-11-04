@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEditor;
 using UnityEngine.UI;
 using UnityEngine.Timeline;
+using TMPro;
 
 public class Turret : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class Turret : MonoBehaviour
     [SerializeField] private Transform firingPoint;
     [SerializeField] private GameObject upgradeUI;
     [SerializeField] private Button upgradeButton;
+    [SerializeField] private TextMeshProUGUI upgradeCostText;
     
     [Header("Attributes")]
     [SerializeField] private float targetingRange = 5f;
@@ -34,10 +36,31 @@ public class Turret : MonoBehaviour
         targetingRangeBase = targetingRange;
 
         upgradeButton.onClick.AddListener(Upgrade);
+
+        if (upgradeUI != null)
+        {
+            upgradeUI.SetActive(false);   
+        }
+
+        UpgradeCost();
     }
 
     private void Update()
     {
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Collider2D hitCollider = Physics2D.OverlapPoint(mousePos);
+
+            if (hitCollider != null && hitCollider.gameObject == gameObject)
+            {
+                if (!UIManager.main.isHovering())
+                {
+                    OpenUpgradeUI();
+                }
+            }
+        }
         //If no target then it waits till a target is spotted.
         if (target == null)
         {
@@ -100,12 +123,16 @@ public class Turret : MonoBehaviour
     public void OpenUpgradeUI()
     {
         upgradeUI.SetActive(true);
+        UpgradeCost();
+
+        UIManager.main.SetCurrentTurret(this);
     }
 
     public void CloseUpgradeUI()
     {
         upgradeUI.SetActive(false);
         UIManager.main.SetHoveringState(false);
+        UIManager.main.ClearCurrentTurret();
     }
 
     public void Upgrade()
@@ -141,6 +168,14 @@ public class Turret : MonoBehaviour
     {
         //Calculates the new targeting range if upgraded again
         return targetingRangeBase * Mathf.Pow(level, 0.2f);
+    }
+
+    private void UpgradeCost()
+    {
+        if (upgradeCostText != null)
+        {
+            upgradeCostText.text = "$" + UpgradeCalculator();
+        }
     }
 
     private void OnDrawGizmosSelected()
