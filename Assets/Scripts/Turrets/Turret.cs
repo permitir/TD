@@ -14,12 +14,18 @@ public class Turret : MonoBehaviour
     [SerializeField] private GameObject upgradeUI;
     [SerializeField] private Button upgradeButton;
     [SerializeField] private TextMeshProUGUI upgradeCostText;
+
+    [Header("Audio")]
+    [SerializeField] private AudioClip shootSound;
+    [SerializeField] private float soundVolume = 0.025f;
+    private AudioSource audioSource;
     
     [Header("Attributes")]
     [SerializeField] private float targetingRange = 5f;
     [SerializeField] private float rotationSpeed = 5f;
     [SerializeField] private float BPS = 1; // Bullet Per Second
     [SerializeField] private int baseUpgradeCost = 100;
+    [SerializeField] private int maxLevel = 5; //Max level a turret can be upgraded to
 
     private float bpsBase;
     private float targetingRangeBase;
@@ -43,6 +49,12 @@ public class Turret : MonoBehaviour
         }
 
         UpgradeCost();
+
+        //Audio source
+        audioSource = gameObject.AddComponent<AudioSource>();
+        audioSource.playOnAwake = false;
+        audioSource.spatialBlend = 0f;
+        audioSource.volume = soundVolume;
     }
 
     private void Update()
@@ -89,6 +101,12 @@ public class Turret : MonoBehaviour
 
     private void Shoot()
     {
+        if (shootSound != null && audioSource != null)
+        {
+            audioSource.PlayOneShot(shootSound);
+        }
+
+
         //gets bullet prefab and shoots it at the enemy from the turrets firing point.
         GameObject bulletObj = Instantiate(bulletPrefab, firingPoint.position, Quaternion.identity);
         Bullet bulletScript = bulletObj.GetComponent<Bullet>();
@@ -175,6 +193,11 @@ public class Turret : MonoBehaviour
         if (upgradeCostText != null)
         {
             upgradeCostText.text = "$" + UpgradeCalculator();
+        }
+
+        if (level >= maxLevel)
+        {
+            upgradeCostText.text = "MAX";
         }
     }
 

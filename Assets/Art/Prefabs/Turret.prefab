@@ -624,10 +624,13 @@ MonoBehaviour:
   upgradeUI: {fileID: 4544197775936047920}
   upgradeButton: {fileID: 8380411601313961778}
   upgradeCostText: {fileID: 8158878625259511975}
+  shootSound: {fileID: 8300000, guid: aef4337e814460f47a74340e4ddee6b0, type: 3}
+  soundVolume: 0.025
   targetingRange: 3
   rotationSpeed: 100
   BPS: 1
   baseUpgradeCost: 100
+  maxLevel: 2
 --- !u!58 &-3004097914122251855
 CircleCollider2D:
   m_ObjectHideFlags: 0
