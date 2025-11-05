@@ -131,6 +131,11 @@ public class LevelManager : MonoBehaviour
         }
     }
 
+    public void NextLevel()
+    {
+        SceneManager.LoadScene("Level 2");
+    }
+
     public void RestartGame()
     {
         Time.timeScale = 1f; // reset timer
