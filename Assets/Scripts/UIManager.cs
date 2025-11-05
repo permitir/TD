@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class UIManager : MonoBehaviour
@@ -47,5 +48,10 @@ public class UIManager : MonoBehaviour
     public void ClearCurrentTurret()
     {
         currentTurret = null;
+    }
+
+    internal void SetCurrentTurret(Plot plot)
+    {
+        throw new NotImplementedException();
     }
 }

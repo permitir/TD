@@ -630,7 +630,7 @@ MonoBehaviour:
   rotationSpeed: 100
   BPS: 1
   baseUpgradeCost: 100
-  maxLevel: 2
+  maxLevel: 5
 --- !u!58 &-3004097914122251855
 CircleCollider2D:
   m_ObjectHideFlags: 0

@@ -34,6 +34,7 @@ public class Plot : MonoBehaviour
         if (towerObj != null)
         {
             turret.OpenUpgradeUI();
+            UIManager.main.SetHoveringState(this);
             return;
         }
 
@@ -52,5 +53,6 @@ public class Plot : MonoBehaviour
         //gets the tower user wants to build
         towerObj = Instantiate(towerToBuild.prefab, transform.position, Quaternion.identity);
         turret = towerObj.GetComponent<Turret>();
+        UIManager.main.ClearCurrentTurret();
     }
 }

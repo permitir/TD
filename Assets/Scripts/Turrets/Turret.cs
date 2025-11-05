@@ -3,6 +3,7 @@ using UnityEditor;
 using UnityEngine.UI;
 using UnityEngine.Timeline;
 using TMPro;
+using UnityEditor.ShaderGraph;
 
 public class Turret : MonoBehaviour
 {
@@ -25,7 +26,7 @@ public class Turret : MonoBehaviour
     [SerializeField] private float rotationSpeed = 5f;
     [SerializeField] private float BPS = 1; // Bullet Per Second
     [SerializeField] private int baseUpgradeCost = 100;
-    [SerializeField] private int maxLevel = 5; //Max level a turret can be upgraded to
+    [SerializeField] private int maxLevel = 6; //Max level a turret can be upgraded to
 
     private float bpsBase;
     private float targetingRangeBase;
@@ -140,6 +141,12 @@ public class Turret : MonoBehaviour
 
     public void OpenUpgradeUI()
     {
+        if (level >= maxLevel)
+        {
+            CloseUpgradeUI();
+        }
+
+        UIManager.main.ClearCurrentTurret();
         upgradeUI.SetActive(true);
         UpgradeCost();
 
@@ -159,6 +166,7 @@ public class Turret : MonoBehaviour
         if (UpgradeCalculator() > LevelManager.main.currency) return;
 
         LevelManager.main.SpendCurrency(UpgradeCalculator());
+        UIManager.main.ClearCurrentTurret();
 
         level++;
 
@@ -197,7 +205,9 @@ public class Turret : MonoBehaviour
 
         if (level >= maxLevel)
         {
+            CloseUpgradeUI();
             upgradeCostText.text = "MAX";
+            upgradeCostText.color = Color.red;
         }
     }
 
