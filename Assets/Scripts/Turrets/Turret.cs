@@ -14,7 +14,9 @@ public class Turret : MonoBehaviour
     [SerializeField] private Transform firingPoint;
     [SerializeField] private GameObject upgradeUI;
     [SerializeField] private Button upgradeButton;
+    [SerializeField] private Button sellButton;
     [SerializeField] private TextMeshProUGUI upgradeCostText;
+    [SerializeField] private TextMeshProUGUI sellValueText;
 
     [Header("Audio")]
     [SerializeField] private AudioClip shootSound;
@@ -27,6 +29,8 @@ public class Turret : MonoBehaviour
     [SerializeField] private float BPS = 1; // Bullet Per Second
     [SerializeField] private int baseUpgradeCost = 100;
     [SerializeField] private int maxLevel = 6; //Max level a turret can be upgraded to
+    [SerializeField] int turretCosts = 100;
+    [SerializeField] float sellPercentage = 0.55f;
 
     private float bpsBase;
     private float targetingRangeBase;
@@ -35,18 +39,21 @@ public class Turret : MonoBehaviour
     private float timeUntilFire;
 
     private int level = 1;
+    private int totalMoneySpent = 0;
 
     private void Start()
     {
         //Turrets' basic needs
         bpsBase = BPS;
         targetingRangeBase = targetingRange;
+        totalMoneySpent = turretCosts; //tracks initial turret costs
 
-        upgradeButton.onClick.AddListener(Upgrade);
+        upgradeButton.onClick.AddListener(Upgrade); //Button Listener
+        sellButton.onClick.AddListener(SellTurret); //Button Listener
 
         if (upgradeUI != null)
         {
-            upgradeUI.SetActive(false);   
+            upgradeUI.SetActive(false);
         }
 
         UpgradeCost();
@@ -102,6 +109,7 @@ public class Turret : MonoBehaviour
 
     private void Shoot()
     {
+        //Play shooting sound
         if (shootSound != null && audioSource != null)
         {
             audioSource.PlayOneShot(shootSound);
@@ -141,11 +149,6 @@ public class Turret : MonoBehaviour
 
     public void OpenUpgradeUI()
     {
-        if (level >= maxLevel)
-        {
-            CloseUpgradeUI();
-        }
-
         UIManager.main.ClearCurrentTurret();
         upgradeUI.SetActive(true);
         UpgradeCost();
@@ -166,6 +169,7 @@ public class Turret : MonoBehaviour
         if (UpgradeCalculator() > LevelManager.main.currency) return;
 
         LevelManager.main.SpendCurrency(UpgradeCalculator());
+        totalMoneySpent += UpgradeCalculator();
         UIManager.main.ClearCurrentTurret();
 
         level++;
@@ -179,6 +183,14 @@ public class Turret : MonoBehaviour
         Debug.Log("New cost: " + UpgradeCalculator());
     }
 
+    public void SellTurret()
+    {
+        int sellValue = Mathf.RoundToInt(totalMoneySpent * sellPercentage / level); //calculating how much the player gets back by doing all upgrades/tower value * x%
+        LevelManager.main.IncreaseCurrency(sellValue); //give player money back
+        CloseUpgradeUI();
+        Destroy(gameObject);
+    }
+
     private int UpgradeCalculator()
     {
         //Updates the new value of how much its going to cost the next upgrade for the newly upgraded turret/tower
@@ -187,13 +199,13 @@ public class Turret : MonoBehaviour
 
     private float BPSCalculator() {
         //Calculates the new BulletPerSecond speed if upgraded again
-        return bpsBase * Mathf.Pow(level, 0.4f);
+        return bpsBase * Mathf.Pow(level, 0.25f);
     }
 
     private float RangeCalculator()
     {
         //Calculates the new targeting range if upgraded again
-        return targetingRangeBase * Mathf.Pow(level, 0.2f);
+        return targetingRangeBase * Mathf.Pow(level, 0.15f);
     }
 
     private void UpgradeCost()
@@ -205,9 +217,15 @@ public class Turret : MonoBehaviour
 
         if (level >= maxLevel)
         {
-            CloseUpgradeUI();
+            upgradeButton.interactable = false;
             upgradeCostText.text = "MAX";
             upgradeCostText.color = Color.red;
+        }
+
+        if (sellValueText != null)
+        {
+            int sellValue = Mathf.RoundToInt(totalMoneySpent * sellPercentage / level);
+            sellValueText.text = "$" + sellValue;
         }
     }
 

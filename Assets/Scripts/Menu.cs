@@ -7,6 +7,7 @@ public class Menu : MonoBehaviour
     [Header("References")]
     [SerializeField] TextMeshProUGUI currencyUI;
     [SerializeField] Animator anim;
+    [SerializeField] private GameObject clickBlocker;
 
     private bool isMenuOpen = true;
 
@@ -14,6 +15,11 @@ public class Menu : MonoBehaviour
     {
         isMenuOpen = !isMenuOpen;
         anim.SetBool("MenuOpen", isMenuOpen);
+
+        if (clickBlocker != null)
+        {
+            clickBlocker.SetActive(isMenuOpen);
+        }
     }
 
     private void OnGUI()

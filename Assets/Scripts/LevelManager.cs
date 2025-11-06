@@ -12,10 +12,10 @@ public class LevelManager : MonoBehaviour
     public Transform[] path; //Waypoints the enemies will follow
 
     [Header("Game")]
-    public int currency; //Currency to buy & upgrade turrets
+    public int currency = 150; //Currency to buy & upgrade turrets
     public int playerLives = 20;
     public int currentLives;
-    public int maxwave;
+    public int maxwave = 50;
 
     [Header("Game State")]
     public bool isGameOver = false; //tracks if player lost.
@@ -35,9 +35,7 @@ public class LevelManager : MonoBehaviour
 
     public void Start()
     {
-        currency = 150;
         currentLives = playerLives;
-        maxwave = 50;
         LivesTextUI();
     }
 
@@ -66,7 +64,7 @@ public class LevelManager : MonoBehaviour
     {
         if (livesText != null)
         {
-            livesText.text = currentLives + "/" + "20";   
+            livesText.text = currentLives + "/" + playerLives;   
         }
     }
 

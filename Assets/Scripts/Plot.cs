@@ -1,4 +1,6 @@
+using UnityEditor.PackageManager;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.Rendering.UI;
 
 public class Plot : MonoBehaviour
@@ -28,6 +30,9 @@ public class Plot : MonoBehaviour
 
     private void OnMouseDown()
     {
+        if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject())
+            return;
+
         if (UIManager.main.isHovering()) return;
 
     //if there's already a tower placed, do nothing
