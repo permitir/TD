@@ -34,6 +34,12 @@ public class Plot : MonoBehaviour
 
     private void OnMouseDown()
     {
+        // DETAILED DEBUG
+        Debug.Log("=== PLOT CLICKED ===");
+        Debug.Log("IsPlacementBlocked: " + UIManager.main.IsPlacementBlocked());
+        Debug.Log("IsPointerOverUI: " + UIManager.main.IsPointerOverUI());
+        Debug.Log("isHovering (any UI): " + UIManager.main.isHovering());
+
         //Checks if placement is blocked
         if (UIManager.main.IsPlacementBlocked())
         {

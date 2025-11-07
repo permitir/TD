@@ -7,10 +7,10 @@ public class UIManager : MonoBehaviour
 {
     public static UIManager main;
 
-    private bool isHoveringShopUI;
-    private bool isHoveringUI;
+    private bool isHoveringShopUI; //check if hovering over shop ui
+    private bool isHoveringUI; // check if hovering over upgrade ui
     private Turret currentTurret;
-    public bool isMenuOpen;
+    public bool isMenuOpen; // check if menu is open
 
     private void Awake()
     {
@@ -23,8 +23,14 @@ public class UIManager : MonoBehaviour
         {
             if (!isHoveringUI && !IsPointerOverUI() && currentTurret != null)
             {
-                currentTurret.CloseUpgradeUI();
-                currentTurret = null;
+                Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                Collider2D hit = Physics2D.OverlapPoint(mousePos);
+
+                 if (hit == null || !hit.GetComponent<Plot>())
+                {
+                    currentTurret.CloseUpgradeUI();
+                    currentTurret = null;
+                }
             }
         }
     }
@@ -41,7 +47,7 @@ public class UIManager : MonoBehaviour
     //Checks if turret placement should be blocked
     public bool IsPlacementBlocked()
     {
-        return isMenuOpen || isHoveringUI || isHoveringShopUI || IsPointerOverUI();
+        return isHoveringUI || isHoveringShopUI || IsPointerOverUI();
     }
 
     public void SetShopHoverState(bool state)
