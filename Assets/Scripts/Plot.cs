@@ -20,7 +20,11 @@ public class Plot : MonoBehaviour
 
     private void OnMouseEnter()
     {
-        sr.color = hoverColor;
+        //Doesn't show hover colour if UI in the way
+        if (!UIManager.main.IsPlacementBlocked())
+        {
+            sr.color = hoverColor;
+        }
     }
 
     private void OnMouseExit()
@@ -30,10 +34,12 @@ public class Plot : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject())
+        //Checks if placement is blocked
+        if (UIManager.main.IsPlacementBlocked())
+        {
+            Debug.Log("Placement blocked");
             return;
-
-        if (UIManager.main.isHovering()) return;
+        }
 
     //if there's already a tower placed, do nothing
         if (towerObj != null)

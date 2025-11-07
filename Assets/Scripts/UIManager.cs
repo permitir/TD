@@ -1,17 +1,15 @@
 using System;
+using UnityEditor.PackageManager;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class UIManager : MonoBehaviour
 {
-    [Header("Blocker")]
-    [SerializeField] private GameObject uiBlocker;
-
     public static UIManager main;
 
+    private bool isHoveringShopUI;
     private bool isHoveringUI;
     private Turret currentTurret;
-
     public bool isMenuOpen;
 
     private void Awake()
@@ -19,22 +17,36 @@ public class UIManager : MonoBehaviour
         main = this;
     }
 
-    public bool IsInputBlocked()
-    {
-        return isMenuOpen || (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject());
-    }
-
     private void Update()
     {
         if (Input.GetMouseButtonDown(0))
         {
-            Debug.Log("Pointer over uI?" + EventSystem.current.IsPointerOverGameObject());
-            if (!isHoveringUI && currentTurret != null)
+            if (!isHoveringUI && !IsPointerOverUI() && currentTurret != null)
             {
                 currentTurret.CloseUpgradeUI();
                 currentTurret = null;
             }
         }
+    }
+
+    //checks if pointer is over any UI
+    public bool IsPointerOverUI()
+    {
+        if (EventSystem.current == null)
+            return false;
+
+        return EventSystem.current.IsPointerOverGameObject();
+    }
+
+    //Checks if turret placement should be blocked
+    public bool IsPlacementBlocked()
+    {
+        return isMenuOpen || isHoveringUI || isHoveringShopUI || IsPointerOverUI();
+    }
+
+    public void SetShopHoverState(bool state)
+    {
+        isHoveringShopUI = state;
     }
 
     public void SetHoveringState(bool state)
@@ -44,7 +56,7 @@ public class UIManager : MonoBehaviour
 
     public bool isHovering()
     {
-        return isHoveringUI;
+        return isHoveringUI || isHoveringShopUI;
     }
 
     public void SetCurrentTurret(Turret turret)
@@ -62,8 +74,8 @@ public class UIManager : MonoBehaviour
         currentTurret = null;
     }
 
-    internal void SetCurrentTurret(Plot plot)
+    public void MenuOpen(bool open)
     {
-        throw new NotImplementedException();
+        isMenuOpen = open;
     }
 }

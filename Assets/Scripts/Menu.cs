@@ -7,30 +7,25 @@ public class Menu : MonoBehaviour
     [Header("References")]
     [SerializeField] TextMeshProUGUI currencyUI;
     [SerializeField] Animator anim;
-    [SerializeField] private GameObject clickBlocker;
 
     private bool isMenuOpen = true;
+
+    private void Start()
+    {
+        UIManager.main.MenuOpen(isMenuOpen);
+    }
 
     public void ToggleMenu()
     {
         isMenuOpen = !isMenuOpen;
         anim.SetBool("MenuOpen", isMenuOpen);
 
-        if (clickBlocker != null)
-        {
-            clickBlocker.SetActive(isMenuOpen);
-        }
+        UIManager.main.MenuOpen(isMenuOpen);
     }
 
     private void OnGUI()
     {
         currencyUI.text = "$" + LevelManager.main.currency.ToString();
 
-    }
-
-    public void SetSelected()
-    {
-
-    }
-    
+    }    
 }
