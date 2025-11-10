@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEditor.PackageManager;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -20,6 +21,11 @@ public class Plot : MonoBehaviour
 
     private void OnMouseEnter()
     {
+
+        if (!IsPointerOverUIElement())
+        {
+            sr.color = hoverColor;
+        }
         //Doesn't show hover colour if UI in the way
         if (!UIManager.main.IsPlacementBlocked())
         {
@@ -34,20 +40,19 @@ public class Plot : MonoBehaviour
 
     private void OnMouseDown()
     {
-        // DETAILED DEBUG
-        Debug.Log("=== PLOT CLICKED ===");
-        Debug.Log("IsPlacementBlocked: " + UIManager.main.IsPlacementBlocked());
-        Debug.Log("IsPointerOverUI: " + UIManager.main.IsPointerOverUI());
-        Debug.Log("isHovering (any UI): " + UIManager.main.isHovering());
-
-        //Checks if placement is blocked
-        if (UIManager.main.IsPlacementBlocked())
+        if (IsPointerOverUIElement())
         {
-            Debug.Log("Placement blocked");
             return;
         }
 
-    //if there's already a tower placed, do nothing
+            //Checks if placement is blocked
+            if (UIManager.main.IsPlacementBlocked())
+            {
+                Debug.Log("Placement blocked");
+                return;
+            }
+
+        //if there's already a tower placed, do nothing
         if (towerObj != null)
         {
             turret.OpenUpgradeUI();
@@ -71,5 +76,29 @@ public class Plot : MonoBehaviour
         towerObj = Instantiate(towerToBuild.prefab, transform.position, Quaternion.identity);
         turret = towerObj.GetComponent<Turret>();
         UIManager.main.ClearCurrentTurret();
+    }
+    
+    private bool IsPointerOverUIElement()
+    {
+        if (EventSystem.current == null)
+            return false;
+
+        PointerEventData eventData = new PointerEventData(EventSystem.current);
+        eventData.position = Input.mousePosition;
+
+        List<RaycastResult> results = new List<RaycastResult>();
+        EventSystem.current.RaycastAll(eventData, results);
+
+        foreach (RaycastResult result in results)
+        {
+            GameObject uiObject = result.gameObject;
+
+            if (uiObject.CompareTag("Menu"))
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

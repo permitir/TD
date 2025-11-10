@@ -115,7 +115,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: afdbec20b8b5bf84a81c182efcf5e71f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mouse_over: 0
 --- !u!1 &1609045198181993445
 GameObject:
   m_ObjectHideFlags: 0
@@ -345,7 +344,7 @@ MonoBehaviour:
   upgradeCostText: {fileID: 748632455794955585}
   sellValueText: {fileID: 6488869254055129774}
   shootSound: {fileID: 8300000, guid: 16d35ff9c5d190a41b15bdf3c4e99d30, type: 3}
-  soundVolume: 0.025
+  soundVolume: 0.5
   targetingRange: 5
   rotationSpeed: 200
   BPS: 0.5
