@@ -1022,7 +1022,7 @@ MonoBehaviour:
   upgradeCostText: {fileID: 8158878625259511975}
   sellValueText: {fileID: 6342624397112235367}
   shootSound: {fileID: 8300000, guid: aef4337e814460f47a74340e4ddee6b0, type: 3}
-  soundVolume: 0.5
+  soundVolume: 0.025
   targetingRange: 3
   rotationSpeed: 100
   BPS: 1

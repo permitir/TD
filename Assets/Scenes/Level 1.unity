@@ -1924,7 +1924,7 @@ GameObject:
   - component: {fileID: 132592068}
   m_Layer: 5
   m_Name: Pause
-  m_TagString: Untagged
+  m_TagString: Menu
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6639,12 +6639,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 1290162143, guid: 60eb2d1100e4aac448f6ff0731bfe43e, type: 3}
+  m_Sprite: {fileID: 1358399011, guid: fde422121959e534f8007ba779b7bbcc, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1.28, y: 1.28}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
