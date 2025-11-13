@@ -11,6 +11,7 @@ public class EnemySpawner : MonoBehaviour
 
     [Header("References")]
     [SerializeField] private GameObject[] enemyPrefabs;
+    [SerializeField] private GameObject bossPrefab;
 
 
     [Header("Attributes")]
@@ -19,6 +20,11 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private float timeBtwWaves = 5f; //Btw = Between
     [SerializeField] private float difficultyScalingFactor = 0.75f;
     [SerializeField] private float EnemiesPerSecondCap = 15f;
+
+    [Header("Boss Stats")]
+    [SerializeField] private int bossCount = 0;
+    [SerializeField] private float bossHPMulti = 2f;
+    [SerializeField] private int bossWorthIncrease = 100;
 
 
     [Header("Events")]
@@ -33,6 +39,7 @@ public class EnemySpawner : MonoBehaviour
 
     private void Awake()
     {
+        spawn = this;
         onEnemyDestroy.AddListener(EnemyDestroyed);
     }
 
@@ -50,7 +57,7 @@ public class EnemySpawner : MonoBehaviour
         if (!isSpawning) return;
         timeSinceLastSpawn += Time.deltaTime; //Adds time to counter (seconds)
 
-        if (timeSinceLastSpawn >= (1f / eps) && enemiesLeftToSpawn > 0)
+        if (enemiesLeftToSpawn > 0 && timeSinceLastSpawn >= (1f / Mathf.Max(eps, 0.01f)))
         {
             SpawnEnemy();
             enemiesLeftToSpawn--;
@@ -58,7 +65,7 @@ public class EnemySpawner : MonoBehaviour
             timeSinceLastSpawn = 0f;
         }
 
-        if (enemiesAlive == 0 && enemiesLeftToSpawn == 0) //Starting a new wave
+        if (enemiesAlive <= 0 && enemiesLeftToSpawn <= 0) //Starting a new wave
         {
             EndWave();
         }
@@ -86,11 +93,43 @@ public class EnemySpawner : MonoBehaviour
 
         if (LevelManager.main.isGameOver) yield break;
 
-        isSpawning = true;
-        enemiesLeftToSpawn = EnemiesPerWave();
-        eps = EnemiesPerSec();
+        if (currentWave % 10 == 0)
+        {
+            SpawnBoss();
+        }
+        else
+        {
+            isSpawning = true;
+            enemiesLeftToSpawn = EnemiesPerWave();
+            eps = Mathf.Clamp(EnemiesPerSec(), 0.01f, EnemiesPerSecondCap);
 
-        LevelManager.main.WaveTextUI(currentWave); //Updates counter once new wave starts
+            LevelManager.main.WaveTextUI(currentWave); //Updates counter once new wave starts
+        }
+    }
+
+    private void SpawnBoss()
+    {
+        currentWave++;
+        bossCount++;
+        GameObject boss = Instantiate(bossPrefab, LevelManager.main.startPoint.position, Quaternion.identity);
+        enemiesAlive++;
+        enemiesLeftToSpawn = EnemiesPerWave();
+        isSpawning = true;
+
+        Health health = boss.GetComponent<Health>();
+        if (health != null)
+        {
+            health.isBoss = true;
+
+            //multiplies HP by 2 ^ bosscount
+            health.HP = Mathf.RoundToInt(health.HP * Mathf.Pow(bossHPMulti, bossCount - 1));
+
+            //increase boss worth
+            health.bossWorth += bossWorthIncrease * (bossCount - 1);
+        }
+
+        Debug.Log($"Spawned Boss #{bossCount} — HP: {health.HP}, Worth: {health.bossWorth}");
+
     }
 
     private void EndWave()
@@ -109,7 +148,9 @@ public class EnemySpawner : MonoBehaviour
         //Selects what enemy to spawn every time a new wave starts
         int index = Random.Range(0, enemyPrefabs.Length);
         GameObject prefabToSpawn = enemyPrefabs[index];
-        Instantiate(prefabToSpawn, LevelManager.main.startPoint.position, Quaternion.identity);
+
+        //Selects what enemy to spawn every time a new wave starts
+        Instantiate(prefabToSpawn, LevelManager.main.startPoint.position, Quaternion.identity); 
     }
 
     private int EnemiesPerWave()

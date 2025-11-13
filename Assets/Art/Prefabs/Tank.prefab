@@ -180,5 +180,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7f3a88c032b0274f918bf77284e5356, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HP: 10
+  hp: 10
   enemyWorth: 100
+  isBoss: 0
+  bossWorth: 250

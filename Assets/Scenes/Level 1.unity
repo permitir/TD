@@ -5168,11 +5168,15 @@ MonoBehaviour:
   - {fileID: 8454632332453639548, guid: e345f1ce6ad21134388230bf2af19355, type: 3}
   - {fileID: 8454632332453639548, guid: e345f1ce6ad21134388230bf2af19355, type: 3}
   - {fileID: 8454632332453639548, guid: e9c8bb823758c2c4c8b272b66c2d33cc, type: 3}
+  bossPrefab: {fileID: 8454632332453639548, guid: e3f93abe3f0a7764da0435d39c7fd03a, type: 3}
   baseEnemies: 8
   enemiesPerSecond: 0.5
   timeBtwWaves: 5
   difficultyScalingFactor: 0.75
   EnemiesPerSecondCap: 15
+  bossCount: 0
+  bossHPMulti: 2
+  bossWorthIncrease: 100
 --- !u!114 &376182464
 MonoBehaviour:
   m_ObjectHideFlags: 0
