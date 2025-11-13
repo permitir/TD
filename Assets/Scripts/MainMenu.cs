@@ -7,6 +7,8 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private GameObject mainMenu;
     [SerializeField] private GameObject quitButton;
     [SerializeField] private GameObject controls;
+    [SerializeField] private GameObject enemiesInfo;
+    [SerializeField] private GameObject turretsInfo;
 
     public void PlayGame()
     {
@@ -35,6 +37,30 @@ public class MainMenu : MonoBehaviour
     {
         mainMenu.SetActive(true);
         controls.SetActive(false);
+    }
+
+    public void ShowEnemiesInfo()
+    {
+        howToPlayPanel.SetActive(false);
+        enemiesInfo.SetActive(true);
+    }
+
+    public void HideEnemiesInfo()
+    {
+        howToPlayPanel.SetActive(true);
+        enemiesInfo.SetActive(false);
+    }
+
+    public void ShowTurretsInfo()
+    {
+        howToPlayPanel.SetActive(false);
+        enemiesInfo.SetActive(true);
+    }
+
+    public void HideTurretsInfo()
+    {
+        howToPlayPanel.SetActive(true);
+        enemiesInfo.SetActive(false);
     }
 
     public void QuitGame()

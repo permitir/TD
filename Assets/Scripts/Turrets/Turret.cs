@@ -4,6 +4,7 @@ using UnityEngine.UI;
 using UnityEngine.Timeline;
 using TMPro;
 using UnityEditor.ShaderGraph;
+using UnityEngine.Audio;
 
 public class Turret : MonoBehaviour
 {
@@ -20,7 +21,7 @@ public class Turret : MonoBehaviour
 
     [Header("Audio")]
     [SerializeField] private AudioClip shootSound;
-    [SerializeField] private float soundVolume = 0.025f;
+    [SerializeField] private AudioMixer mainAudioMixer;
     private AudioSource audioSource;
     
     [Header("Attributes")]
@@ -62,7 +63,6 @@ public class Turret : MonoBehaviour
         audioSource = gameObject.AddComponent<AudioSource>();
         audioSource.playOnAwake = false;
         audioSource.spatialBlend = 0f;
-        audioSource.volume = soundVolume;
     }
 
     private void Update()
@@ -110,9 +110,9 @@ public class Turret : MonoBehaviour
     private void Shoot()
     {
         //Play shooting sound
-        if (shootSound != null && audioSource != null)
+        if (shootSound != null)
         {
-            audioSource.PlayOneShot(shootSound);
+            audioSource.PlayOneShot(shootSound, GetSFXVolume());
         }
 
 
@@ -120,6 +120,13 @@ public class Turret : MonoBehaviour
         GameObject bulletObj = Instantiate(bulletPrefab, firingPoint.position, Quaternion.identity);
         Bullet bulletScript = bulletObj.GetComponent<Bullet>();
         bulletScript.SetTarget(target);
+    }
+
+    private float GetSFXVolume()
+    {
+        float vol = 0f;
+        mainAudioMixer.GetFloat("SFX", out vol);
+        return Mathf.Pow(10f, vol / 20f);
     }
 
     private void FindTarget()

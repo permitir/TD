@@ -43,7 +43,14 @@ public class LevelManager : MonoBehaviour
     {
         if (waveUI != null)
         {
-         waveUI.text = currentWave + "/" + maxwave;   
+            waveUI.text = currentWave + "/" + maxwave;
+
+            if (currentWave <= maxwave / 5)
+                waveUI.color = Color.green;
+            else if (currentWave <= maxwave / 2)
+                waveUI.color = Color.yellow;
+            else
+                waveUI.color = Color.red;
         }
     }
 
@@ -64,7 +71,14 @@ public class LevelManager : MonoBehaviour
     {
         if (livesText != null)
         {
-            livesText.text = currentLives + "/" + playerLives;   
+            livesText.text = currentLives + "/" + playerLives;
+
+            if (currentLives <= playerLives / 5)
+                livesText.color = Color.red;
+            else if (currentLives <= playerLives / 2)
+                livesText.color = Color.yellow;
+            else
+                livesText.color = Color.green;
         }
     }
 
