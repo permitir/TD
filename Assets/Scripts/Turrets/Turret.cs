@@ -13,11 +13,19 @@ public class Turret : MonoBehaviour
     [SerializeField] private LayerMask enemyMask;
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private Transform firingPoint;
+
+    [Header("Upgrades")]
     [SerializeField] private GameObject upgradeUI;
+    [SerializeField] private GameObject upgradeStatsUI;
     [SerializeField] private Button upgradeButton;
     [SerializeField] private Button sellButton;
     [SerializeField] private TextMeshProUGUI upgradeCostText;
     [SerializeField] private TextMeshProUGUI sellValueText;
+
+    [Header("Upgrade Stats")]
+    [SerializeField] private TextMeshProUGUI levelText;
+    [SerializeField] private TextMeshProUGUI rangeText;
+    [SerializeField] private TextMeshProUGUI bpsText;
 
     [Header("Audio")]
     [SerializeField] private AudioClip shootSound;
@@ -158,7 +166,9 @@ public class Turret : MonoBehaviour
     {
         UIManager.main.ClearCurrentTurret();
         upgradeUI.SetActive(true);
+        upgradeStatsUI.SetActive(true);
         UpgradeCost();
+        UpdateUpgradeUI();
 
         UIManager.main.SetCurrentTurret(this);
     }
@@ -166,6 +176,7 @@ public class Turret : MonoBehaviour
     public void CloseUpgradeUI()
     {
         upgradeUI.SetActive(false);
+        upgradeStatsUI.SetActive(false);
         UIManager.main.SetHoveringState(false);
         UIManager.main.ClearCurrentTurret();
     }
@@ -185,9 +196,6 @@ public class Turret : MonoBehaviour
         targetingRange = RangeCalculator();
 
         CloseUpgradeUI();
-        Debug.Log("New BPS: " + BPS);
-        Debug.Log("New Targeting Range: " + targetingRange);
-        Debug.Log("New cost: " + UpgradeCalculator());
     }
 
     public void SellTurret()
@@ -234,6 +242,13 @@ public class Turret : MonoBehaviour
             int sellValue = Mathf.RoundToInt(totalMoneySpent * sellPercentage / level);
             sellValueText.text = "$" + sellValue;
         }
+    }
+
+    private void UpdateUpgradeUI()
+    {
+        levelText.text = "Level: " + level + "/" + maxLevel;
+        rangeText.text = "Range: " + targetingRange.ToString("F1");
+        bpsText.text = "Fire Rate: " + BPS.ToString("F2");
     }
 
     private void OnDrawGizmosSelected()
