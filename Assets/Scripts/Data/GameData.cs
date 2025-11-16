@@ -3,7 +3,7 @@ public class GameData
 {
     //Levels
     public int highestLevelUnlocked = 1; // default
-    public bool[] levelCompleted = new bool[50]; //track if level completed
+    public bool[] levelCompleted = new bool[3]; //track if level completed
 
     // Audio
     public float masterVolume = 1f;
@@ -18,7 +18,7 @@ public class GameData
     public GameData()
     {
         highestLevelUnlocked = 1;
-        levelCompleted = new bool[50];
+        levelCompleted = new bool[3];
         masterVolume = 1f;
         musicVolume = 1f;
         sfxVolume = 1f;

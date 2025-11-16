@@ -43,13 +43,6 @@ public class Plot : MonoBehaviour
             return;
         }
 
-            //Checks if placement is blocked
-            if (UIManager.main.IsPlacementBlocked())
-            {
-                Debug.Log("Placement blocked");
-                return;
-            }
-
         //if there's already a tower placed, do nothing
         if (towerObj != null)
         {
@@ -93,6 +86,7 @@ public class Plot : MonoBehaviour
 
             if (uiObject.CompareTag("Menu"))
             {
+                Debug.Log("Blocked by UI");
                 return true;
             }
         }

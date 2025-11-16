@@ -102,7 +102,7 @@ public class MainMenu : MonoBehaviour
     public void HideTurretsInfo()
     {
         howToPlayPanel.SetActive(true);
-        enemiesInfo.SetActive(false);
+        turretsInfo.SetActive(false);
     }
 
     public void QuitGame()
