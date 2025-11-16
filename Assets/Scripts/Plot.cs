@@ -1,8 +1,6 @@
 using System.Collections.Generic;
-using UnityEditor.PackageManager;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.Rendering.UI;
 
 public class Plot : MonoBehaviour
 {

@@ -1,9 +1,7 @@
 using UnityEngine;
-using UnityEditor;
 using UnityEngine.UI;
 using UnityEngine.Timeline;
 using TMPro;
-using UnityEditor.ShaderGraph;
 using UnityEngine.Audio;
 
 public class Turret : MonoBehaviour
@@ -249,13 +247,6 @@ public class Turret : MonoBehaviour
         levelText.text = "Level: " + level + "/" + maxLevel;
         rangeText.text = "Range: " + targetingRange.ToString("F1");
         bpsText.text = "Fire Rate: " + BPS.ToString("F2");
-    }
-
-    private void OnDrawGizmosSelected()
-    {
-        //How I can see the turret/tower range
-        Handles.color = Color.green;
-        Handles.DrawWireDisc(transform.position, transform.forward, targetingRange);
     }
     
 }

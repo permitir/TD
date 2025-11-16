@@ -9,10 +9,52 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private GameObject controls;
     [SerializeField] private GameObject enemiesInfo;
     [SerializeField] private GameObject turretsInfo;
+    [SerializeField] private GameObject LevelSelect;
+
+    private void Start()
+    {
+        if (SaveSystem.instance == null)
+        {
+            GameObject saveSystemObj = new GameObject("SaveSystem");
+            saveSystemObj.AddComponent<SaveSystem>();
+        }
+    }
 
     public void PlayGame()
     {
+        // loads highest level if user played before, if not. Start at 1
+        int highestLevel = SaveSystem.instance.GetHighestLevelUnlocked();
+
+        int sceneIndex = highestLevel;
+
+        if (sceneIndex < SceneManager.sceneCountInBuildSettings)
+        {
+            SceneManager.LoadScene(sceneIndex);
+            Debug.Log("Loading Level " + highestLevel);
+        }
+        else
+        {
+            // Fallback to Level 1
+            SceneManager.LoadScene("Level 1");
+        }
+    }
+
+    public void NewGame()
+    {
         SceneManager.LoadScene("Level 1");
+        Debug.Log("Starting new game from Level 1");
+    }
+
+    public void OpenLevelSelect()
+    {
+        mainMenu.SetActive(false);
+        LevelSelect.SetActive(true);
+    }
+
+    public void HideLevelSelect()
+    {
+        mainMenu.SetActive(true);
+        LevelSelect.SetActive(false);
     }
 
     public void ShowHowToPlay()
@@ -54,7 +96,7 @@ public class MainMenu : MonoBehaviour
     public void ShowTurretsInfo()
     {
         howToPlayPanel.SetActive(false);
-        enemiesInfo.SetActive(true);
+        turretsInfo.SetActive(true);
     }
 
     public void HideTurretsInfo()

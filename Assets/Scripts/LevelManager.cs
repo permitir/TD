@@ -16,6 +16,7 @@ public class LevelManager : MonoBehaviour
     public int playerLives = 20;
     public int currentLives;
     public int maxwave = 50;
+    public int currentLevelNumber = 1; //individually set for every level 👍
 
     [Header("Game State")]
     public bool isGameOver = false; //tracks if player lost.
@@ -89,16 +90,15 @@ public class LevelManager : MonoBehaviour
             Debug.Log("Game Won!");
             Win();
         }
-        else
-        {
-            Debug.Log("Victory has not been triggered");
-        }
     }
 
     public void Win()
     {
         isGameWon = true;
         Debug.Log("Game Condition has been met to win.");
+
+        // Save level completion
+        SaveSystem.instance.CompleteLevel(currentLevelNumber);
 
         Time.timeScale = 0f;
 
@@ -145,7 +145,19 @@ public class LevelManager : MonoBehaviour
 
     public void NextLevel()
     {
-        SceneManager.LoadScene("Level 2");
+        Time.timeScale = 1f; // reset time
+
+        // load next level by getting next scene index ohh yeahhh vector
+        int nextSceneIndex = SceneManager.GetActiveScene().buildIndex + 1;
+
+        if (nextSceneIndex < SceneManager.sceneCountInBuildSettings)
+        {
+            SceneManager.LoadScene(nextSceneIndex);
+        }
+        else
+        {
+            LoadMainMenu();
+        }
     }
 
     public void RestartGame()

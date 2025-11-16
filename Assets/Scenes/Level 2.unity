@@ -5488,6 +5488,7 @@ MonoBehaviour:
   playerLives: 30
   currentLives: 0
   maxwave: 100
+  currentLevelNumber: 2
   isGameOver: 0
   isGameWon: 0
   gameOverUI: {fileID: 1130458168}
@@ -5535,11 +5536,15 @@ MonoBehaviour:
   - {fileID: 8454632332453639548, guid: e9c8bb823758c2c4c8b272b66c2d33cc, type: 3}
   - {fileID: 8454632332453639548, guid: bc7ec0e3b5471074ca5ff6b2dda60d03, type: 3}
   - {fileID: 8454632332453639548, guid: bc7ec0e3b5471074ca5ff6b2dda60d03, type: 3}
+  bossPrefab: {fileID: 0}
   baseEnemies: 12
   enemiesPerSecond: 0.5
   timeBtwWaves: 5
   difficultyScalingFactor: 0.75
   EnemiesPerSecondCap: 15
+  bossCount: 0
+  bossHPMulti: 2
+  bossWorthIncrease: 100
 --- !u!114 &376182464
 MonoBehaviour:
   m_ObjectHideFlags: 0

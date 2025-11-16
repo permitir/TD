@@ -53,11 +53,4 @@ public class IceTurret : MonoBehaviour
         em.ResetSpeed();
     }
 
-    private void OnDrawGizmosSelected()
-    {
-        //How I can set the targeting range of the turret/tower
-        Handles.color = Color.cyan;
-        Handles.DrawWireDisc(transform.position, transform.forward, targetingRange);
-    }
-
 }
