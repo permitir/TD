@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -1808761863518832496}
   - component: {fileID: -3844713068462817728}
   m_Layer: 6
-  m_Name: Boss
+  m_Name: Boss Level 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -180,7 +180,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7f3a88c032b0274f918bf77284e5356, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 250
-  enemyWorth: 750
+  hp: 500
+  enemyWorth: 1600
   isBoss: 1
-  bossWorth: 750
+  bossWorth: 1600
