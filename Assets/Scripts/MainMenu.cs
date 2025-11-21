@@ -1,3 +1,5 @@
+using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -10,6 +12,7 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private GameObject enemiesInfo;
     [SerializeField] private GameObject turretsInfo;
     [SerializeField] private GameObject LevelSelect;
+    [SerializeField] private TextMeshProUGUI ErrorLoading;
 
     private void Start()
     {
@@ -43,6 +46,38 @@ public class MainMenu : MonoBehaviour
     {
         SceneManager.LoadScene("Level 1");
         Debug.Log("Starting new game from Level 1");
+    }
+
+    public void Level2()
+    {
+        int highestLevel = SaveSystem.instance.GetHighestLevelUnlocked();
+
+        if (highestLevel >= 2)
+        {
+            SceneManager.LoadScene("Level 2");
+            Debug.Log("Loading Scene Level 2");
+        } 
+        else
+        {
+            if (ErrorLoading != null)
+                StartCoroutine(ShowErrorTemporarily(3f)); // shows error for 5 seconds
+        }
+    }
+
+    public void Level3()
+    {
+        int highestLevel = SaveSystem.instance.GetHighestLevelUnlocked();
+
+        if (highestLevel >= 3)
+        {
+            SceneManager.LoadScene("Level 3");
+            Debug.Log("Loading Scene Level 3");
+        } 
+        else
+        {
+            if (ErrorLoading != null)
+                StartCoroutine(ShowErrorTemporarily(3f)); // shows error for 5 seconds
+        }
     }
 
     public void OpenLevelSelect()
@@ -109,5 +144,12 @@ public class MainMenu : MonoBehaviour
     {
         Application.Quit();
         Debug.Log("Quit Game"); //So I can see if it worked
+    }
+
+    private IEnumerator ShowErrorTemporarily(float duration)
+    {
+        ErrorLoading.gameObject.SetActive(true); // actives text
+        yield return new WaitForSeconds(duration); // waits X amount of time 
+        ErrorLoading.gameObject.SetActive(false); // deactivates text
     }
 }
