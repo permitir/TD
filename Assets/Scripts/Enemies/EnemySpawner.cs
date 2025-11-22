@@ -10,7 +10,7 @@ public class EnemySpawner : MonoBehaviour
     public static EnemySpawner spawn;
 
     [Header("References")]
-    [SerializeField] private GameObject[] enemyPrefabs;
+    [SerializeField] private GameObject[] enemyPrefabs; // A  list of all current enemy prefabs
     [SerializeField] private GameObject bossPrefab;
 
 
@@ -75,6 +75,7 @@ public class EnemySpawner : MonoBehaviour
     {
         //Decreases the amount of enemies alive
         enemiesAlive--;
+        SaveSystem.instance.AddEnemyKilled();
     }
 
     private IEnumerator StartWave()
@@ -93,11 +94,12 @@ public class EnemySpawner : MonoBehaviour
 
         if (LevelManager.main.isGameOver) yield break;
 
+        // If current wave has a remainder of 0, start a boss wave (every 10 waves)
         if (currentWave % 10 == 0)
         {
             SpawnBoss();
         }
-        else
+        else // However, if not a boss wave then continue with normal waves
         {
             isSpawning = true;
             enemiesLeftToSpawn = EnemiesPerWave();
@@ -138,7 +140,7 @@ public class EnemySpawner : MonoBehaviour
         timeSinceLastSpawn = 0f;
         currentWave++;
 
-        LevelManager.main.IncreaseCurrency(25 + (currentWave * 5));
+        LevelManager.main.IncreaseCurrency(25 + (currentWave * 5)); // Reward user currency for making it past every wave
 
         StartCoroutine(StartWave());
     }

@@ -9,7 +9,7 @@ public class Health : MonoBehaviour
     [SerializeField] private int enemyWorth = 25;
 
     [Header("Boss")]
-    public bool isBoss = false;
+    public bool isBoss = false; // Checks if the wave is for a boss
     public int bossWorth = 250;
 
     public int HP

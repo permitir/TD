@@ -37,7 +37,7 @@ public class LevelManager : MonoBehaviour
     public void Start()
     {
         currentLives = playerLives;
-        LivesTextUI();
+        LivesTextUI(); // Instantly update the users life.
     }
 
     public void WaveTextUI(int currentWave)
@@ -46,6 +46,7 @@ public class LevelManager : MonoBehaviour
         {
             waveUI.text = currentWave + "/" + maxwave;
 
+            // Colour scheme so it is more user friendly
             if (currentWave <= maxwave / 5)
                 waveUI.color = Color.green;
             else if (currentWave <= maxwave / 2)
@@ -74,6 +75,7 @@ public class LevelManager : MonoBehaviour
         {
             livesText.text = currentLives + "/" + playerLives;
 
+            // Colour scheme so it is more user friendly
             if (currentLives <= playerLives / 5)
                 livesText.color = Color.red;
             else if (currentLives <= playerLives / 2)
@@ -126,6 +128,7 @@ public class LevelManager : MonoBehaviour
     {
         //Increase user currency after enemy killed
         currency += amount;
+        SaveSystem.instance.AddCurrency(amount); // Saves how much money the user has ever made playing the game
     }
 
     public bool SpendCurrency(int amount)

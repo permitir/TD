@@ -158,4 +158,26 @@ public class SaveSystem : MonoBehaviour
     {
         return currentData.totalCurrency;
     }
+
+    public void AddTurretPlaced()
+    {
+        currentData.totalTurretsPlaced++;
+        SaveGame();
+    }
+
+    public int GetTotalTurretsPlaced()
+    {
+        return currentData.totalTurretsPlaced;
+    }
+
+    public void AddEnemyKilled()
+    {
+        currentData.totalEnemiesKilled++;
+        SaveGame();
+    }
+
+    public int GetTotalEnemiesKilled()
+    {
+        return currentData.totalEnemiesKilled;
+    }
 }

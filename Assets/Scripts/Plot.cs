@@ -66,11 +66,13 @@ public class Plot : MonoBehaviour
         //gets the tower user wants to build
         towerObj = Instantiate(towerToBuild.prefab, transform.position, Quaternion.identity);
         turret = towerObj.GetComponent<Turret>();
+        SaveSystem.instance.AddTurretPlaced(); // Saves how many turrets the user has ever placed through their playtime
         UIManager.main.ClearCurrentTurret();
     }
     
     private bool IsPointerOverUIElement()
     {
+        // Checker to see if the user's mouse is over an UI (blocks turret placement if mouse clicks are over an UI (TAG: MENU))
         if (EventSystem.current == null)
             return false;
 

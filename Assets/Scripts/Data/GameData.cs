@@ -2,13 +2,13 @@
 public class GameData
 {
     //Levels
-    public int highestLevelUnlocked = 1; // default
-    public bool[] levelCompleted = new bool[3]; //track if level completed
+    public int highestLevelUnlocked = 1; // Default
+    public bool[] levelCompleted = new bool[3]; // Tracks if level completed
 
     // Audio
-    public float masterVolume = 1f;
-    public float musicVolume = 1f;
-    public float sfxVolume = 1f;
+    public float masterVolume = 1f; // Default value
+    public float musicVolume = 1f; // Default value
+    public float sfxVolume = 1f; // Default value
 
     // Stats - for like spotify wrapped but in my game
     public int totalCurrency = 0;

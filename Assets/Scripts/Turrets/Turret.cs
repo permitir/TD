@@ -73,7 +73,7 @@ public class Turret : MonoBehaviour
 
     private void Update()
     {
-
+        // Checker to see if the user's mouse is over an UI (blocks turret placement if mouse clicks are over an UI (TAG: MENU))
         if (Input.GetMouseButtonDown(0))
         {
             Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -115,7 +115,7 @@ public class Turret : MonoBehaviour
 
     private void Shoot()
     {
-        //Play shooting sound
+        // Play shooting sound
         if (shootSound != null)
         {
             audioSource.PlayOneShot(shootSound, GetSFXVolume());
@@ -244,6 +244,7 @@ public class Turret : MonoBehaviour
 
     private void UpdateUpgradeUI()
     {
+        // Text show in the TurretUpgrade UI.
         levelText.text = "Level: " + level + "/" + maxLevel;
         rangeText.text = "Range: " + targetingRange.ToString("F1");
         bpsText.text = "Fire Rate: " + BPS.ToString("F2");

@@ -18,6 +18,8 @@ public class UIManager : MonoBehaviour
 
     private void Update()
     {
+
+        // Checker to see if the user's mouse is over an UI (blocks turret placement if mouse clicks are over an UI (TAG: MENU))
         if (Input.GetMouseButtonDown(0))
         {
             if (!isHoveringUI && !IsPointerOverUI() && currentTurret != null)
