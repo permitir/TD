@@ -57,6 +57,7 @@ public class Plot : MonoBehaviour
         //if tower costs more than currency (player's balance), do nothing
         if (towerToBuild.cost > LevelManager.main.currency)
         {
+            LevelManager.main.ShowErrorTemporarily(1.5f);
             Debug.Log("You do not have any money to buy this item currently.");
             return;
         }
@@ -66,7 +67,11 @@ public class Plot : MonoBehaviour
         //gets the tower user wants to build
         towerObj = Instantiate(towerToBuild.prefab, transform.position, Quaternion.identity);
         turret = towerObj.GetComponent<Turret>();
-        SaveSystem.instance.AddTurretPlaced(); // Saves how many turrets the user has ever placed through their playtime
+        //SaveSystem.instance.AddTurretPlaced(); - OLD 
+        if (SaveSystem.instance != null) // Saves how many turrets the user has ever placed through their playtime - NEW
+        {
+            SaveSystem.instance.AddTurretPlaced();
+        }
         UIManager.main.ClearCurrentTurret();
     }
     

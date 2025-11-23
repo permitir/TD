@@ -34,7 +34,8 @@ public class SaveSystem : MonoBehaviour
     {
         string json = JsonUtility.ToJson(currentData, true);
         File.WriteAllText(saveFilePath, json);
-        Debug.Log("Game saved");
+        //Debug.Log("Game saved"); NOTICE: Only ENABLE if testing.
+        // IF NOT TESTING, REFRAIN FROM REMOVING THE // as everytime turret is placed or enemy is killed, it will spam logs.
     }
     
     // Loads the game

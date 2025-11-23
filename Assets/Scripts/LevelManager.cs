@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
+using System.Collections;
 
 public class LevelManager : MonoBehaviour
 {
@@ -27,6 +28,7 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private GameObject gameWonUI;
     [SerializeField] private TextMeshProUGUI waveUI;
     [SerializeField] private TextMeshProUGUI livesText;
+    [SerializeField] private TextMeshProUGUI NoMoneyText;
 
 
     private void Awake()
@@ -36,6 +38,11 @@ public class LevelManager : MonoBehaviour
 
     public void Start()
     {
+        if (SaveSystem.instance == null)
+        {
+            GameObject saveSystemObj = new GameObject("SaveSystem");
+            saveSystemObj.AddComponent<SaveSystem>();
+        }
         currentLives = playerLives;
         LivesTextUI(); // Instantly update the users life.
     }
@@ -141,7 +148,6 @@ public class LevelManager : MonoBehaviour
         }
         else
         {
-            Debug.Log("You have no money to buy this item.");
             return false;
         }
     }
@@ -186,4 +192,10 @@ public class LevelManager : MonoBehaviour
         throw new NotImplementedException();
     }
 
+    public IEnumerator ShowErrorTemporarily(float duration)
+    {
+        NoMoneyText.gameObject.SetActive(true); // actives text
+        yield return new WaitForSeconds(duration); // waits X amount of time 
+        NoMoneyText.gameObject.SetActive(false); // deactivates text
+    }
 }
