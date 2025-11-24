@@ -57,7 +57,7 @@ public class Plot : MonoBehaviour
         //if tower costs more than currency (player's balance), do nothing
         if (towerToBuild.cost > LevelManager.main.currency)
         {
-            LevelManager.main.ShowErrorTemporarily(1.5f);
+            StartCoroutine(LevelManager.main.ShowErrorTemporarily(1.5f));
             Debug.Log("You do not have any money to buy this item currently.");
             return;
         }
@@ -93,7 +93,7 @@ public class Plot : MonoBehaviour
 
             if (uiObject.CompareTag("Menu"))
             {
-                Debug.Log("Blocked by UI");
+                // Debug.Log("Blocked by UI"); - KEEP IT AS A NOTE UNLESS ISSUE WITH PLOTS! (This will flood player logs if not disabled!)
                 return true;
             }
         }
