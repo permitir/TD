@@ -25,7 +25,9 @@ public class LevelManager : MonoBehaviour
 
     [Header("UI")]
     [SerializeField] private GameObject gameOverUI;
+    //[SerializeField] private GameObject GameOverstats;
     [SerializeField] private GameObject gameWonUI;
+    //[SerializeField] private GameObject GameWonstats;
     [SerializeField] private TextMeshProUGUI waveUI;
     [SerializeField] private TextMeshProUGUI livesText;
     [SerializeField] private TextMeshProUGUI NoMoneyText;

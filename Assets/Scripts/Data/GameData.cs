@@ -10,7 +10,7 @@ public class GameData
     public float musicVolume = 1f; // Default value
     public float sfxVolume = 1f; // Default value
 
-    // Stats - for like spotify wrapped but in my game
+    // Stats - for like spotify wrapped but in my game / for once all levels completed
     public int totalCurrency = 0;
     public int totalEnemiesKilled = 0;
     public int totalTurretsPlaced = 0;
