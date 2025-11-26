@@ -25,10 +25,16 @@ public class Health : MonoBehaviour
         if (hp <= 0)
         {
             if (isBoss)
+            {
                 LevelManager.main.IncreaseCurrency(bossWorth);
+                LevelManager.main.EnemyKilled(isBoss);
+            } 
             else
+            {
                 LevelManager.main.IncreaseCurrency(enemyWorth);
-
+                LevelManager.main.EnemyKilled();
+                SaveSystem.instance.AddEnemyKilled();
+            }
             
             EnemySpawner.onEnemyDestroy.Invoke();
             Destroy(gameObject);

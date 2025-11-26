@@ -3,6 +3,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
 using System.Collections;
+using UnityEditor.Timeline;
 
 public class LevelManager : MonoBehaviour
 {
@@ -25,12 +26,25 @@ public class LevelManager : MonoBehaviour
 
     [Header("UI")]
     [SerializeField] private GameObject gameOverUI;
-    //[SerializeField] private GameObject GameOverstats;
     [SerializeField] private GameObject gameWonUI;
-    //[SerializeField] private GameObject GameWonstats;
     [SerializeField] private TextMeshProUGUI waveUI;
     [SerializeField] private TextMeshProUGUI livesText;
     [SerializeField] private TextMeshProUGUI NoMoneyText;
+
+    [Header("Game Won UI")]
+    [SerializeField] private TextMeshProUGUI winTimeText;
+    [SerializeField] private TextMeshProUGUI winEnemiesKilledText;
+    [SerializeField] private TextMeshProUGUI winBossesKilledText;
+
+    [Header("Game Over UI")]
+    [SerializeField] private TextMeshProUGUI loseTimeText;
+    [SerializeField] private TextMeshProUGUI loseEnemiesKilledText;
+    [SerializeField] private TextMeshProUGUI loseBossesKilledText;
+
+    // Level stat tracking
+    private float levelStartTime;
+    private int enemiesKilledThisLevel = 0;
+    private int bossesKilledThisLevel = 0;
 
 
     private void Awake()
@@ -47,6 +61,23 @@ public class LevelManager : MonoBehaviour
         }
         currentLives = playerLives;
         LivesTextUI(); // Instantly update the users life.
+
+        // Track time in level
+        levelStartTime = Time.time;
+
+        // Reset stats level
+        enemiesKilledThisLevel = 0;
+        bossesKilledThisLevel = 0;
+    }
+
+    public void EnemyKilled(bool isBoss = false)
+    {
+        enemiesKilledThisLevel++;
+
+        if (isBoss)
+        {
+            bossesKilledThisLevel++;
+        }
     }
 
     public void WaveTextUI(int currentWave)
@@ -108,6 +139,10 @@ public class LevelManager : MonoBehaviour
         isGameWon = true;
         Debug.Log("Game Condition has been met to win.");
 
+        // Calculate time taken to beat level
+        float timeTaken = Time.time - levelStartTime;
+        UpdateWinStats(timeTaken); // Update stats display
+
         // Save level completion
         SaveSystem.instance.CompleteLevel(currentLevelNumber);
 
@@ -119,10 +154,33 @@ public class LevelManager : MonoBehaviour
         }
     }
 
+    private void UpdateWinStats(float timeTaken)
+    {
+        // Formats the time as in mins:seconds
+        string timeString = FormatTime(timeTaken);
+
+        if (winTimeText != null)
+        {
+            winTimeText.text = "Time:" + timeString;
+        }
+        if (winEnemiesKilledText != null)
+        {
+            winEnemiesKilledText.text = "Enemies killed: " + enemiesKilledThisLevel;
+        }
+        if (winBossesKilledText != null)
+        {
+            winBossesKilledText.text = "Bosses killed: " + bossesKilledThisLevel;
+        }
+    }
+
     private void GameOver()
     {
         isGameOver = true;
         Debug.Log("Game Lost!");
+
+        // Calculate time spent
+        float timeSpent = Time.time - levelStartTime;
+        UpdateGameOverStats(timeSpent); // Updates game over stats display
 
         Time.timeScale = 0f;
 
@@ -130,6 +188,32 @@ public class LevelManager : MonoBehaviour
         {
             gameOverUI.SetActive(true);
         }
+    }
+
+    private void UpdateGameOverStats(float timeSpent)
+    {
+        // formats the time as in mins:seconds
+        string timeString = FormatTime(timeSpent);
+
+        if (loseTimeText != null)
+        {
+            loseTimeText.text = "Time survived: " + timeString;
+        }
+        if (loseEnemiesKilledText != null)
+        {
+            loseEnemiesKilledText.text =  "Enemies killed: " + enemiesKilledThisLevel;
+        }
+        if (loseBossesKilledText != null)
+        {
+            loseBossesKilledText.text = "Bosses killed: " + bossesKilledThisLevel;
+        }
+    }
+
+    private string FormatTime(float timeInSeconds)
+    {
+        int minutes = Mathf.FloorToInt(timeInSeconds / 60f);
+        int seconds = Mathf.FloorToInt(timeInSeconds % 60f);
+        return string.Format("{0:00}:{1:00}", minutes, seconds);
     }
 
 

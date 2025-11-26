@@ -75,7 +75,6 @@ public class EnemySpawner : MonoBehaviour
     {
         //Decreases the amount of enemies alive
         enemiesAlive--;
-        SaveSystem.instance.AddEnemyKilled();
     }
 
     private IEnumerator StartWave()
