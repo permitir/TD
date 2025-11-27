@@ -8,7 +8,7 @@ public class UIManager : MonoBehaviour
 
     private bool isHoveringShopUI; //check if hovering over shop ui
     private bool isHoveringUI; // check if hovering over upgrade ui
-    private Turret currentTurret;
+    private BaseTurret currentTurret;
     public bool isMenuOpen; // check if menu is open
 
     private void Awake()
@@ -66,14 +66,14 @@ public class UIManager : MonoBehaviour
         return isHoveringUI || isHoveringShopUI;
     }
 
-    public void SetCurrentTurret(Turret turret)
+    public void SetCurrentTurret(BaseTurret turret)
     {
         if (currentTurret != null && currentTurret != turret)
         {
             currentTurret.CloseUpgradeUI();
         }
 
-        currentTurret = turret;
+    currentTurret = turret;
     }
 
     public void ClearCurrentTurret()

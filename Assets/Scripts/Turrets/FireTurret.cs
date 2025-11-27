@@ -1,10 +1,9 @@
 using UnityEngine;
 
-public class Turret : BaseTurret
+public class FireTurret : BaseTurret
 {
     private void Start()
     {
-        //Turrets' basic needs
         bpsBase = BPS;
         targetingRangeBase = targetingRange;
         totalMoneySpent = turretCosts; //tracks initial turret costs
@@ -78,7 +77,7 @@ public class Turret : BaseTurret
 
         //gets bullet prefab and shoots it at the enemy from the turrets firing point.
         GameObject bulletObj = Instantiate(bulletPrefab, firingPoint.position, Quaternion.identity);
-        Bullet bulletScript = bulletObj.GetComponent<Bullet>();
+        FireBullet bulletScript = bulletObj.GetComponent<FireBullet>();
         bulletScript.SetTarget(target);
     }
 
@@ -111,7 +110,6 @@ public class Turret : BaseTurret
         UIManager.main.ClearCurrentTurret();
 
         level++;
-
         BPS = BPSCalculator();
         targetingRange = RangeCalculator();
 

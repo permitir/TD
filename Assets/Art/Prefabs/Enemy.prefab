@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 591372881595771759}
   - component: {fileID: -1808761863518832496}
   - component: {fileID: -3844713068462817728}
+  - component: {fileID: 5122408927320773716}
   m_Layer: 6
   m_Name: Enemy
   m_TagString: Untagged
@@ -184,3 +185,15 @@ MonoBehaviour:
   enemyWorth: 50
   isBoss: 0
   bossWorth: 250
+--- !u!114 &5122408927320773716
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8454632332453639548}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9fc8d0b1b2495444985af83c90ee56b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

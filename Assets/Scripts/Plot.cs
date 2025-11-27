@@ -9,7 +9,7 @@ public class Plot : MonoBehaviour
     [SerializeField] private Color hoverColor;
 
     public GameObject towerObj;
-    public Turret turret;
+    public BaseTurret turret;
     private Color startColor;
 
     private void Start()
@@ -66,7 +66,7 @@ public class Plot : MonoBehaviour
 
         //gets the tower user wants to build
         towerObj = Instantiate(towerToBuild.prefab, transform.position, Quaternion.identity);
-        turret = towerObj.GetComponent<Turret>();
+        turret = towerObj.GetComponent<BaseTurret>();
         //SaveSystem.instance.AddTurretPlaced(); - OLD 
         if (SaveSystem.instance != null) // Saves how many turrets the user has ever placed through their playtime - NEW
         {

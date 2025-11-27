@@ -11,8 +11,8 @@ public class EnemyMovement : MonoBehaviour
     //Point we want to move to
     private Transform target;
     private int pathIndex = 0;
-
     private float baseSpeed;
+    //private bool isStunned = false;
 
     private void Start()
     {
