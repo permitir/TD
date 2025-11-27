@@ -4777,15 +4777,15 @@ MonoBehaviour:
   - {fileID: 271651930}
   - {fileID: 2102336427}
   - {fileID: 622660135}
-  currency: 500
+  currency: 250
   playerLives: 20
   currentLives: 0
   maxwave: 50
   currentLevelNumber: 2
   isGameOver: 0
   isGameWon: 0
-  gameOverUI: {fileID: 0}
-  gameWonUI: {fileID: 0}
+  gameOverUI: {fileID: 1591471098}
+  gameWonUI: {fileID: 297006655}
   waveUI: {fileID: 93710113}
   livesText: {fileID: 180129844}
   NoMoneyText: {fileID: 1542520723}
