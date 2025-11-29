@@ -52,4 +52,10 @@ public class FireBullet : MonoBehaviour
 
         Destroy(gameObject);
     }
+
+    private void OnBecameInvisible()
+    {
+        Destroy(gameObject);
+    }
+
 }
