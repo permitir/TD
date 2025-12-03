@@ -50,7 +50,7 @@ public abstract class BaseTurret : MonoBehaviour
     public abstract void CloseUpgradeUI();
     protected abstract void Shoot();
 
-    // Shared methods
+    // ALl the shared methods
     protected float GetSFXVolume()
     {
         float vol = 0f;
@@ -120,6 +120,6 @@ public abstract class BaseTurret : MonoBehaviour
     {
         levelText.text = "Level: " + level + "/" + maxLevel;
         rangeText.text = "Range: " + targetingRange.ToString("F1");
-        bpsText.text = "Fire Rate: " + BPS.ToString("F2");
+        bpsText.text = "Fire Rate: " + BPS.ToString("F1");
     }
 }

@@ -41,7 +41,7 @@ public class Turret : BaseTurret
                 }
             }
         }
-        //If no target then it waits till a target is spotted.
+        // If no target then it waits till a target is spotted.
         if (target == null)
         {
             FindTarget();
@@ -52,11 +52,11 @@ public class Turret : BaseTurret
 
         if (!CheckTargetIsInRange())
         {
-            //If target not in range then do nothing 
+            // If target not in range then do nothing 
             target = null;
         }
         else
-        { //However if target in range, shoot and then reset the timer since last bullet shot so it doesn't become a minigun.
+        { // However if target in range, shoot and then reset the timer since last bullet shot so it doesn't become a minigun.
             timeUntilFire += Time.deltaTime;
 
             if (timeUntilFire >= 1f / BPS)
@@ -76,7 +76,7 @@ public class Turret : BaseTurret
         }
 
 
-        //gets bullet prefab and shoots it at the enemy from the turrets firing point.
+        // This gets bullet prefab and shoots it at the enemy from the turrets firing point.
         GameObject bulletObj = Instantiate(bulletPrefab, firingPoint.position, Quaternion.identity);
         Bullet bulletScript = bulletObj.GetComponent<Bullet>();
         bulletScript.SetTarget(target);
@@ -103,7 +103,7 @@ public class Turret : BaseTurret
 
     public void Upgrade()
     {
-        //What happens after user buys a turret/tower upgrade
+        // What happens after user buys a turret/tower upgrade
         if (UpgradeCalculator() > LevelManager.main.currency) return;
 
         LevelManager.main.SpendCurrency(UpgradeCalculator());
@@ -120,8 +120,8 @@ public class Turret : BaseTurret
 
     public void SellTurret()
     {
-        int sellValue = Mathf.RoundToInt(totalMoneySpent * sellPercentage / level); //calculating how much the player gets back by doing all upgrades/tower value * x%
-        LevelManager.main.IncreaseCurrency(sellValue); //give player money back
+        int sellValue = Mathf.RoundToInt(totalMoneySpent * sellPercentage / level); // This calculates how much the player gets back by doing all upgrades/tower value * x%
+        LevelManager.main.IncreaseCurrency(sellValue); // This give player money back
         CloseUpgradeUI();
         Destroy(gameObject);
     }
