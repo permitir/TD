@@ -5611,7 +5611,7 @@ MonoBehaviour:
   - {fileID: 674655447}
   - {fileID: 757178516}
   - {fileID: 622660135}
-  currency: 1000
+  currency: 300
   playerLives: 30
   currentLives: 0
   maxwave: 100
@@ -5670,7 +5670,7 @@ MonoBehaviour:
   - {fileID: 8454632332453639548, guid: e9c8bb823758c2c4c8b272b66c2d33cc, type: 3}
   - {fileID: 8454632332453639548, guid: bc7ec0e3b5471074ca5ff6b2dda60d03, type: 3}
   - {fileID: 8454632332453639548, guid: bc7ec0e3b5471074ca5ff6b2dda60d03, type: 3}
-  bossPrefab: {fileID: 8454632332453639548, guid: 4042bc42071dd454e846d6a9e8a9c347, type: 3}
+  bossPrefab: {fileID: 8454632332453639548, guid: 767038e345a413f41871cac183ee545b, type: 3}
   baseEnemies: 12
   enemiesPerSecond: 0.5
   timeBtwWaves: 5

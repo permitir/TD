@@ -10,19 +10,19 @@ public class LevelManager : MonoBehaviour
     public static LevelManager main;
 
     [Header("Path Setup")]
-    public Transform startPoint; //Where enemies start
-    public Transform[] path; //Waypoints the enemies will follow
+    public Transform startPoint; // This will locate where the enemies will start
+    public Transform[] path; // These are the waypoints the enemies will follow
 
     [Header("Game")]
-    public int currency = 150; //Currency to buy & upgrade turrets
+    public int currency = 150; //The currency used to buy & upgrade turrets
     public int playerLives = 20;
     public int currentLives;
     public int maxwave = 50;
-    public int currentLevelNumber = 1; //individually set for every level 👍
+    public int currentLevelNumber = 1; // This can be individually set for every level 👍
 
     [Header("Game State")]
-    public bool isGameOver = false; //tracks if player lost.
-    public bool isGameWon = false; //tracks if player won.
+    public bool isGameOver = false; // Will track if player lost.
+    public bool isGameWon = false; // Will track if player won.
 
     [Header("UI")]
     [SerializeField] private GameObject gameOverUI;
@@ -219,14 +219,14 @@ public class LevelManager : MonoBehaviour
 
     public void IncreaseCurrency(int amount)
     {
-        //Increase user currency after enemy killed
+        // Increases user currency after each enemy killed
         currency += amount;
         SaveSystem.instance.AddCurrency(amount); // Saves how much money the user has ever made playing the game
     }
 
     public bool SpendCurrency(int amount)
     {
-        //How to buy the turrets/upgrades
+        // Deduction of currency once bought or upgraded a turret
         if (amount <= currency)
         {
             currency -= amount;
@@ -240,7 +240,7 @@ public class LevelManager : MonoBehaviour
 
     public void NextLevel()
     {
-        Time.timeScale = 1f; // reset time
+        Time.timeScale = 1f; // Reset time
 
         // load next level by getting next scene index ohh yeahhh vector
         int nextSceneIndex = SceneManager.GetActiveScene().buildIndex + 1;
@@ -257,19 +257,19 @@ public class LevelManager : MonoBehaviour
 
     public void RestartGame()
     {
-        Time.timeScale = 1f; // reset timer
+        Time.timeScale = 1f; // Reset timer
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     public void QuitGame()
     {
-        //Closes game (ALt + f4)
+        // Closes game (ALt + f4)
         Application.Quit();
     }
 
     public void LoadMainMenu()
     {
-        Time.timeScale = 1f; //reset incase game paused
+        Time.timeScale = 1f; // Reset timer incase gamehas been paused
         SceneManager.LoadScene("MainMenu");
     }
 

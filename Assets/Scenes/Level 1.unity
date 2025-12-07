@@ -5718,7 +5718,7 @@ MonoBehaviour:
   - {fileID: 1243975179}
   - {fileID: 598268665}
   - {fileID: 1716621490}
-  currency: 300
+  currency: 200
   playerLives: 10
   currentLives: 0
   maxwave: 25
