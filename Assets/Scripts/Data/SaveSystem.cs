@@ -13,7 +13,7 @@ public class SaveSystem : MonoBehaviour
         if (instance == null)
         {
             instance = this;
-            DontDestroyOnLoad(gameObject); //Persistent between scenes
+            DontDestroyOnLoad(gameObject); // Persistent between scenes
         }
         else
         {
@@ -21,7 +21,7 @@ public class SaveSystem : MonoBehaviour
             return;
         }
 
-        //Setting the save file path
+        // Setting the save file path
         saveFilePath = Application.persistentDataPath + "/gamesave.json";
         Debug.Log("Save file location: " + saveFilePath);
 
@@ -56,7 +56,7 @@ public class SaveSystem : MonoBehaviour
         }
     }
 
-    //Delete save file (testing purpose)
+    // Delete save file (testing purpose)
     public void DeleteSave()
     {
         if (File.Exists(saveFilePath))
@@ -67,7 +67,7 @@ public class SaveSystem : MonoBehaviour
         }
     }
 
-    // Levels (progress)
+    // Levels data (progress)
 
     public void UnlockLevel(int levelNumber)
     {
@@ -91,7 +91,7 @@ public class SaveSystem : MonoBehaviour
 
     public void CompleteLevel(int levelNumber)
     {
-        //mark level as completed
+        // Will mark level as completed
         if (levelNumber > 0 && levelNumber <= currentData.levelCompleted.Length)
         {
             currentData.levelCompleted[levelNumber - 1] = true;
@@ -112,7 +112,7 @@ public class SaveSystem : MonoBehaviour
         return currentData.levelCompleted[levelNumber - 1];
     }
 
-    // audio
+    // Audio data
     
     public void SetMasterVolume(float volume)
     {
@@ -147,7 +147,7 @@ public class SaveSystem : MonoBehaviour
         return currentData.sfxVolume;
     }
 
-    // player/user
+    // Player/user data
     
     public void AddCurrency(int amount)
     {

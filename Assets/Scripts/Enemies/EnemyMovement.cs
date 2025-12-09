@@ -6,7 +6,7 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField] private Rigidbody2D rb;
 
     [Header("Attributes")]
-    [SerializeField] private float moveSpeed = 2f;
+    [SerializeField] private float moveSpeed = 2f; // Default enemy movement speed
 
     //Point we want to move to
     private Transform target;
@@ -22,14 +22,14 @@ public class EnemyMovement : MonoBehaviour
 
     private void Update()
     {
-        //Checking how close the enemy is to the next path/checkpoint
+        // Checking how close the enemy is to the next path/checkpoint
         if (Vector2.Distance(target.position, transform.position) <= 0.1f)
         {
             pathIndex++;
 
             if (pathIndex >= LevelManager.main.path.Length)
             {
-                //If enemy makes it to the last path/checkpoint it will be destroyed, and the user will lose a life
+                // If enemy makes it to the last path/checkpoint it will be destroyed, and the user will lose a life
                 LevelManager.main.LoseLife();
                 EnemySpawner.onEnemyDestroy.Invoke();
                 Destroy(gameObject);
@@ -45,7 +45,7 @@ public class EnemyMovement : MonoBehaviour
     private void FixedUpdate()
     {
         //Direction our enemy needs to go to 
-        Vector2 direction = (target.position - transform.position).normalized; //normalized so it only goes between 0-1
+        Vector2 direction = (target.position - transform.position).normalized; // Normalized so it only goes between 0-1
 
         rb.velocity = direction * moveSpeed;
     }

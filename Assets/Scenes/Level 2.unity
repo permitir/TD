@@ -4839,7 +4839,7 @@ MonoBehaviour:
   baseEnemies: 8
   enemiesPerSecond: 0.5
   timeBtwWaves: 5
-  difficultyScalingFactor: 0.75
+  difficultyScalingFactor: 1
   EnemiesPerSecondCap: 15
   bossCount: 0
   bossHPMulti: 2
