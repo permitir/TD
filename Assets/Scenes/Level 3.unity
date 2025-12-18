@@ -5612,7 +5612,7 @@ MonoBehaviour:
   - {fileID: 674655447}
   - {fileID: 757178516}
   - {fileID: 622660135}
-  currency: 50000
+  currency: 300
   playerLives: 30
   currentLives: 0
   maxwave: 100
