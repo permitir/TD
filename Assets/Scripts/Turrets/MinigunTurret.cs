@@ -84,7 +84,7 @@ public class MinigunTurret : BaseTurret
 
         if (isFiring)
         {
-            // Spin up- increases the spin level of turret
+            // Spin up - increases the spin level of turret
             Mathf.Clamp01(currentSpinLevel + (Time.deltaTime / spinUpTime));
             // Safeguard to keep the value locked between 0 and 1
         } 

@@ -10,7 +10,7 @@ public class ElectricityTurret : BaseTurret
     [SerializeField] private LineRenderer electricityLine; // Use this instead of bullet prefab
     [SerializeField] private float electricityDuration = 0.25f;
     [SerializeField] private int electricityDamage = 1;
-    [SerializeField] private float stunDuration = 1f; // How long enemies will be stunned for
+    [SerializeField] private float stunDuration = 0.5f; // How long enemies will be stunned for
 
     [Header("Upgrade Stats")]
     [SerializeField] private TextMeshProUGUI ElectricityDamageText;

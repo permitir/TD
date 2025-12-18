@@ -1859,9 +1859,9 @@ MonoBehaviour:
   targetingRange: 3
   rotationSpeed: 100
   BPS: 0.6
-  baseUpgradeCost: 300
+  baseUpgradeCost: 1000
   maxLevel: 6
-  turretCosts: 250
+  turretCosts: 750
   sellPercentage: 0.55
 --- !u!58 &7160793107100447082
 CircleCollider2D:

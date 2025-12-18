@@ -1632,7 +1632,7 @@ MonoBehaviour:
   targetingRange: 3
   rotationSpeed: 100
   BPS: 1
-  baseUpgradeCost: 100
+  baseUpgradeCost: 125
   maxLevel: 6
   turretCosts: 100
   sellPercentage: 0.55

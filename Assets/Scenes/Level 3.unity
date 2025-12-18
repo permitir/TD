@@ -1192,7 +1192,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Electricity Turret
 
-    $500'
+    $1250'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -5612,7 +5612,7 @@ MonoBehaviour:
   - {fileID: 674655447}
   - {fileID: 757178516}
   - {fileID: 622660135}
-  currency: 300
+  currency: 500
   playerLives: 30
   currentLives: 0
   maxwave: 100
@@ -5694,22 +5694,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   towers:
   - name: Turret
-    cost: 75
+    cost: 100
     prefab: {fileID: 7732885029754731552, guid: ebb978cbcffe2c9478f2e08f1b529879, type: 3}
   - name: Sniper
-    cost: 150
+    cost: 250
     prefab: {fileID: 2880399827382042185, guid: bf2fa660a69ff99418dfe1774bdb817d, type: 3}
   - name: IceTower
-    cost: 200
+    cost: 500
     prefab: {fileID: 8562418611622253727, guid: 0ca1cc67726a1c344bbd5d612b9e4e29, type: 3}
   - name: FireTurret
-    cost: 300
+    cost: 750
     prefab: {fileID: 7568361381709791046, guid: 4ef0ec69204e2c94aac8740cb08a886a, type: 3}
   - name: Electricity Turret
-    cost: 500
+    cost: 1250
     prefab: {fileID: 195175672490278929, guid: 79c2f4286479c3943824f03cc230c208, type: 3}
   - name: Minigun
-    cost: 1250
+    cost: 1750
     prefab: {fileID: 1327642145621414080, guid: 9382e77fed759494eae313d76eeee941, type: 3}
 --- !u!114 &376182465
 MonoBehaviour:
@@ -10331,7 +10331,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Fire Turret
 
-    $300'
+    $750'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -11803,7 +11803,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Ice Tower
 
-    $200'
+    $500'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -15372,7 +15372,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Sniper
 
-    $150
+    $250
 
 '
   m_isRightToLeft: 0
@@ -17932,7 +17932,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Minigun
 
-    $1250'
+    $1750'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -21500,7 +21500,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Turret
 
-    $75
+    $100
 
 '
   m_isRightToLeft: 0

@@ -181,6 +181,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hp: 15
-  enemyWorth: 100
+  enemyWorth: 150
   isBoss: 0
   bossWorth: 250
