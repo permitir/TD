@@ -17,7 +17,7 @@ public class BuildManager : MonoBehaviour
 
     public Tower GetSelectedTower()
     {
-        //How to build/place towers on the map
+        // How to build/place towers on the map
         return towers[selectedTower];
     }
 

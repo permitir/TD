@@ -51,7 +51,7 @@ public class Plot : MonoBehaviour
             return;
         }
 
-        //tower to build = selected tower
+        // Tower to build = selected tower
         Tower towerToBuild = BuildManager.main.GetSelectedTower();
 
         //if tower costs more than currency (player's balance), do nothing
