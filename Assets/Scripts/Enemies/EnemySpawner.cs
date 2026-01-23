@@ -97,6 +97,7 @@ public class EnemySpawner : MonoBehaviour
         if (currentWave % 10 == 0)
         {
             SpawnBoss();
+            LevelManager.main.WaveTextUI(currentWave); //Updates counter once new wave starts
         }
         else // However, if not a boss wave then continue with normal waves
         {
