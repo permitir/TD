@@ -54,17 +54,17 @@ public class Plot : MonoBehaviour
         // Tower to build = selected tower
         Tower towerToBuild = BuildManager.main.GetSelectedTower();
 
-        //if tower costs more than currency (player's balance), do nothing
+        //if tower costs more than currency (player's balance), do nothing & show error
         if (towerToBuild.cost > LevelManager.main.currency)
         {
-            StartCoroutine(LevelManager.main.ShowErrorTemporarily(1.5f));
+            StartCoroutine(LevelManager.main.ShowErrorTemporarily(1.5f)); // How long the error message will display for
             Debug.Log("You do not have any money to buy this item currently.");
             return;
         }
 
-        LevelManager.main.SpendCurrency(towerToBuild.cost);
+        LevelManager.main.SpendCurrency(towerToBuild.cost); // Spends currency if money > cost.
 
-        //gets the tower user wants to build
+        // Gets the tower user wants to build
         towerObj = Instantiate(towerToBuild.prefab, transform.position, Quaternion.identity);
         turret = towerObj.GetComponent<BaseTurret>();
         //SaveSystem.instance.AddTurretPlaced(); - OLD 
@@ -72,24 +72,24 @@ public class Plot : MonoBehaviour
         {
             SaveSystem.instance.AddTurretPlaced();
         }
-        UIManager.main.ClearCurrentTurret();
+        UIManager.main.ClearCurrentTurret(); 
     }
     
     private bool IsPointerOverUIElement()
     {
         // Checker to see if the user's mouse is over an UI (blocks turret placement if mouse clicks are over an UI (TAG: MENU))
-        if (EventSystem.current == null)
+        if (EventSystem.current == null) // Checks if theres an event system on scene
             return false;
 
-        PointerEventData eventData = new PointerEventData(EventSystem.current);
-        eventData.position = Input.mousePosition;
+        PointerEventData eventData = new PointerEventData(EventSystem.current); // Stores information of where the mouse pointer is
+        eventData.position = Input.mousePosition; // position of where the mouse actually is
 
-        List<RaycastResult> results = new List<RaycastResult>();
-        EventSystem.current.RaycastAll(eventData, results);
+        List<RaycastResult> results = new List<RaycastResult>(); // Empty list to store all UI elements the raycast hits & fills list with all the UI elements it hits
+        EventSystem.current.RaycastAll(eventData, results); // loops every UI element the raycast hit
 
-        foreach (RaycastResult result in results)
+        foreach (RaycastResult result in results) // Get GameObject of current UI being checked
         {
-            GameObject uiObject = result.gameObject;
+            GameObject uiObject = result.gameObject; // Checks if it has "Menu" tag
 
             if (uiObject.CompareTag("Menu"))
             {
@@ -98,6 +98,6 @@ public class Plot : MonoBehaviour
             }
         }
 
-        return false;
+        return false; // if no tag hit, free to place turret
     }
 }

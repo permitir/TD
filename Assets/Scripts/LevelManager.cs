@@ -15,8 +15,8 @@ public class LevelManager : MonoBehaviour
 
     [Header("Game")]
     public int currency = 150; //The currency used to buy & upgrade turrets
-    public int playerLives = 20;
-    public int currentLives;
+    public int playerLives = 20; // Max lives
+    public int currentLives; // Current out of max
     public int maxwave = 50;
     public int currentLevelNumber = 1; // This can be individually set for every level 👍
 

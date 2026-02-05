@@ -19,18 +19,22 @@ public class UIManager : MonoBehaviour
     private void Update()
     {
 
-        // Checker to see if the user's mouse is over an UI (blocks turret placement if mouse clicks are over an UI (TAG: MENU))
+        // Click away to deselect turret
         if (Input.GetMouseButtonDown(0))
         {
             if (!isHoveringUI && !IsPointerOverUI() && currentTurret != null)
             {
+                // checks if mouse is not hovering UI (isHoveringUI tag)
+                // Mouse is not over a UI element with "Menu" tag (isPointerOverUI) 
+                // There is a turret currently selected (currentTurret != null)
                 Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-                Collider2D hit = Physics2D.OverlapPoint(mousePos);
+                Collider2D hit = Physics2D.OverlapPoint(mousePos); // Returns collider if something was hit or null if not
 
-                 if (hit == null || !hit.GetComponent<Plot>())
+                 if (hit == null || !hit.GetComponent<Plot>()) // check if player click empty space or not a plot [[]] hit == null = click on something [[]] (!hit.GetComponent<Plot>()) = clicked on something, but it's not a Plot
                 {
+                    // Player clicked away from the turret/plot, so close the upgrade UI
                     currentTurret.CloseUpgradeUI();
-                    currentTurret = null;
+                    currentTurret = null; // Clears the currently selected turret (deselects it)
                 }
             }
         }
