@@ -27,13 +27,13 @@ public class Bullet : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     { //Take health from enemy
-        other.gameObject.GetComponent<Health>().TakeDamage(bulletDamage);
-        Destroy(gameObject);
+        other.gameObject.GetComponent<Health>().TakeDamage(bulletDamage); // Whenever bullet collide with enemy, gets enemy Health script and takes away X health
+        Destroy(gameObject); // Destroys bullet
     }
 
     private void OnBecameInvisible()
     {
-        Destroy(gameObject);
+        Destroy(gameObject); // Whenever bullet leaves scene destroys it
     }
 
 }

@@ -10,7 +10,7 @@ public class ElectricityTurret : BaseTurret
     [SerializeField] private LineRenderer electricityLine; // Use this instead of bullet prefab
     [SerializeField] private float electricityDuration = 0.25f;
     [SerializeField] private int electricityDamage = 1;
-    [SerializeField] private float stunDuration = 0.5f; // How long enemies will be stunned for
+    [SerializeField] private float stunDuration = 0.4f; // How long enemies will be stunned for
 
     [Header("Upgrade Stats")]
     [SerializeField] private TextMeshProUGUI ElectricityDamageText;
@@ -22,21 +22,21 @@ public class ElectricityTurret : BaseTurret
 
     private void Start()
     {
-        bpsBase = BPS;
-        targetingRangeBase = targetingRange;
-        baseElectricityDamage = electricityDamage;
-        baseStunDuration = stunDuration;
-        totalMoneySpent = turretCosts;
+        bpsBase = BPS; // storing base bullet value
+        targetingRangeBase = targetingRange; // storing value
+        baseElectricityDamage = electricityDamage; // stroing value
+        baseStunDuration = stunDuration; // storing value
+        totalMoneySpent = turretCosts; // storing value
 
-        upgradeButton.onClick.AddListener(Upgrade);
-        sellButton.onClick.AddListener(SellTurret);
+        upgradeButton.onClick.AddListener(Upgrade); // linking upgrade button to Upgrade function
+        sellButton.onClick.AddListener(SellTurret); // linking sell button to SellTurret function
 
         if (upgradeUI != null)
         {
-            upgradeUI.SetActive(false);
+            upgradeUI.SetActive(false); // hide upgrade UI at start
         }
 
-        UpdateUpgradeCost();
+        UpdateUpgradeCost(); // update displayed upgrade cost and sell value
 
         // Audio source
         audioSource = gameObject.AddComponent<AudioSource>();
@@ -46,31 +46,31 @@ public class ElectricityTurret : BaseTurret
         // Setup lightning line renderer
         if (electricityLine != null)
         {
-            electricityLine.enabled = false;
+            electricityLine.enabled = false; // hiding lightning effect at start
         }
     }
 
     private void Update()
     {
-        if (electricityTimer > 0)
+        if (electricityTimer > 0) // if lightning effect is currently shwoing:
         {
-            electricityTimer -= Time.deltaTime;
-            if (electricityTimer <= 0 && electricityLine != null)
+            electricityTimer -= Time.deltaTime; // count down the timer
+            if (electricityTimer <= 0 && electricityLine != null) // when timer reaches 0:
             {
-                electricityLine.enabled = false;
+                electricityLine.enabled = false; // hides the lightning effect
             }
         }
 
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0)) // when left mouse is clicked
         {
-            Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            Collider2D hitCollider = Physics2D.OverlapPoint(mousePos);
+            Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition); // convert mouse pos to world pos
+            Collider2D hitCollider = Physics2D.OverlapPoint(mousePos); // check what was clicked
 
-            if (hitCollider != null && hitCollider.gameObject == gameObject)
+            if (hitCollider != null && hitCollider.gameObject == gameObject) // if this turret was clicked
             {
-                if (!UIManager.main.isHovering())
+                if (!UIManager.main.isHovering()) // make sure it isnt hovering over UI
                 {
-                    OpenUpgradeUI();
+                    OpenUpgradeUI(); // open upgrade menu
                 }
             }
         }
@@ -78,24 +78,24 @@ public class ElectricityTurret : BaseTurret
         // If no target then wait for one
         if (target == null)
         {
-            FindTarget();
-            return;
+            FindTarget(); // searching for enemy
+            return; // exit until enemy found
         }
 
-        RotateTowardsTarget();
+        RotateTowardsTarget(); // rotate towards target
 
-        if (!CheckTargetIsInRange())
+        if (!CheckTargetIsInRange()) // if target moved out of range
         {
-            target = null;
+            target = null; // clear the target so turret find a new one
         }
         else
         {
-            timeUntilFire += Time.deltaTime;
+            timeUntilFire += Time.deltaTime; // increase firing timer
 
-            if (timeUntilFire >= 1f / BPS)
+            if (timeUntilFire >= 1f / BPS) // if enough time has passed:
             {
-                Shoot();
-                timeUntilFire = 0f;
+                Shoot(); // fire at the target
+                timeUntilFire = 0f; // reset firing timer
             }
         }
     }
@@ -113,13 +113,13 @@ public class ElectricityTurret : BaseTurret
 
     private void ElectricityChain(Transform initialTarget)
     {
-        if (initialTarget == null) return;
+        if (initialTarget == null) return; // Exit if no target found
 
         // Stores all targets hit by the chain
-        Transform[] targets = new Transform[chainTarget];
-        int targetsHit = 0;
-        targets[targetsHit] = initialTarget;
-        targetsHit++;
+        Transform[] targets = new Transform[chainTarget]; // Array to hold all enemies to stun
+        int targetsHit = 0; // how many enemies have been hit
+        targets[targetsHit] = initialTarget; // add first target as targets[0]
+        targetsHit++; // Increase counter
 
         // Damage and stun the first target
         ApplyElectricityEffect(initialTarget);
@@ -127,17 +127,17 @@ public class ElectricityTurret : BaseTurret
         // Find and damage chained targets
         Transform currentTarget = initialTarget;
 
-        for (int i = 1; i < chainTarget; i++)
+        for (int i = 1; i < chainTarget; i++) // Loop through remaining chain slots
         {
-            Transform nextTarget = FindNearestEnemy(currentTarget, targets, targetsHit);
+            Transform nextTarget = FindNearestEnemy(currentTarget, targets, targetsHit); // Find closests enemy that has NOT been hit
 
-            if (nextTarget != null)
+            if (nextTarget != null) // If more extra targets
             {
-                targets[targetsHit] = nextTarget;
+                targets[targetsHit] = nextTarget; // add to array
                 targetsHit++;
 
                 ApplyElectricityEffect(nextTarget);
-                currentTarget = nextTarget;
+                currentTarget = nextTarget; // Update current position for next chain search
             } 
             else
             {
@@ -148,67 +148,67 @@ public class ElectricityTurret : BaseTurret
         // Draws the electricity effect
         if (electricityLine != null)
         {
-            DrawElectricity(targets, targetsHit);
+            DrawElectricity(targets, targetsHit); // Shows the lightning chain from enemy to enemy
         }
     }
 
     private Transform FindNearestEnemy(Transform form, Transform[] excludeTargets, int excludeCount)
     {
-        RaycastHit2D[] hits = Physics2D.CircleCastAll(form.position, chainRange, Vector2.zero, 0f, enemyMask);
+        RaycastHit2D[] hits = Physics2D.CircleCastAll(form.position, chainRange, Vector2.zero, 0f, enemyMask); // Finds all enemies within the chain range
 
-        Transform nearest = null;
-        float nearestDistance = Mathf.Infinity;
+        Transform nearest = null; // Stores the closest enemy
+        float nearestDistance = Mathf.Infinity; // start with infinite distance
 
-        foreach (RaycastHit2D hit in hits)
+        foreach (RaycastHit2D hit in hits) // check each enemy found
         {
             // Skip if alraedy targetted
-            bool alreadyHit = false;
-            for (int i = 0; i < excludeCount; i++)
+            bool alreadyHit = false; // flag to check if the enemy actually has been hit
+            for (int i = 0; i < excludeCount; i++) // loop through all PREVIOUS targets
             {
-                if (excludeTargets[i] == hit.transform)
+                if (excludeTargets[i] == hit.transform) // check if enemies match
                 {
-                    alreadyHit = true;
-                    break;
+                    alreadyHit = true; // mark as alr hit
+                    break; // Stop check
                 }
             }
 
-            if (alreadyHit) continue;
+            if (alreadyHit) continue; // skip if enemy alr been hit
 
-            float distance = Vector2.Distance(form.position, hit.transform.position);
+            float distance = Vector2.Distance(form.position, hit.transform.position); // calculate distance to next enemy
             if (distance < nearestDistance)
             {
-                nearestDistance = distance;
-                nearest = hit.transform;
+                nearestDistance = distance; // Update closest distance
+                nearest = hit.transform; // Update closest enemy
             }
         }
 
-        return nearest;
+        return nearest; // nearestEnemy
     }
 
     private void ApplyElectricityEffect(Transform enemy)
     {
         // Deals damage
-        Health enemyHealth = enemy.GetComponent<Health>();
+        Health enemyHealth = enemy.GetComponent<Health>(); 
         if (enemyHealth != null)
         {
-            enemyHealth.TakeDamage(electricityDamage);
+            enemyHealth.TakeDamage(electricityDamage); // Apply the electricity damage
         }
 
         // Applies stun effect
-        StunEffect stunEffect = enemy.GetComponent<StunEffect>();
+        StunEffect stunEffect = enemy.GetComponent<StunEffect>(); // Check if enemy has stun effect
         if (stunEffect == null)
         {
-            stunEffect = enemy.gameObject.AddComponent<StunEffect>();
+            stunEffect = enemy.gameObject.AddComponent<StunEffect>(); // If null add stun effect
         }
 
-        stunEffect.ApplyStun(stunDuration);
+        stunEffect.ApplyStun(stunDuration); // Stun enemy for the duration
     }
 
     private void DrawElectricity(Transform[] targets, int count)
     {
-        if (electricityLine == null || count == 0) return;
+        if (electricityLine == null || count == 0) return; // stop if no line renderer or no targets
 
-        electricityLine.positionCount = count + 1;
+        electricityLine.positionCount = count + 1; // Number of points
         electricityLine.SetPosition(0, firingPoint.position);
 
         // Draws line to each chained target
@@ -216,12 +216,12 @@ public class ElectricityTurret : BaseTurret
         {
             if (targets[i] != null)
             {
-                electricityLine.SetPosition(i + 1, targets[i].position);
+                electricityLine.SetPosition(i + 1, targets[i].position); // Draw line to enemy pos(x,y)
             }
         }
 
         electricityLine.enabled = true;
-        electricityTimer = electricityDuration;
+        electricityTimer = electricityDuration; // Set timer how long to show the effect
     }
 
     public override void OpenUpgradeUI()
@@ -247,25 +247,29 @@ public class ElectricityTurret : BaseTurret
     public void Upgrade()
     {
         //What happens after user buys a turret/tower upgrade
-        if (UpgradeCalculator() > LevelManager.main.currency) return;
-
-        LevelManager.main.SpendCurrency(UpgradeCalculator());
-        totalMoneySpent += UpgradeCalculator();
-        UIManager.main.ClearCurrentTurret();
-
-        level++;
-        BPS = BPSCalculator();
-        targetingRange = RangeCalculator();
-        electricityDamage = baseElectricityDamage + (level - 1);
-        stunDuration = baseStunDuration + ((level - 1) * 0.1f);
-
-        // Increase chain targets every 2 levels
-        if (level % 2 == 0)
+        if (UpgradeCalculator() > LevelManager.main.currency)
         {
-            chainTarget++;
-        }
+            StartCoroutine(LevelManager.main.ShowErrorTemporarily(1.5f));
+        } else
+        {
+            LevelManager.main.SpendCurrency(UpgradeCalculator());
+            totalMoneySpent += UpgradeCalculator();
+            UIManager.main.ClearCurrentTurret();
 
-        CloseUpgradeUI();
+            level++;
+            BPS = BPSCalculator();
+            targetingRange = RangeCalculator();
+            electricityDamage = baseElectricityDamage + (level - 1);
+            stunDuration = baseStunDuration + ((level - 1) * 0.1f);
+
+            // Increase chain targets every 2 levels
+            if (level % 2 == 0)
+            {
+                chainTarget++;
+            }
+
+            CloseUpgradeUI();
+        }
     }
 
     private void UpdateElectricityUpgradeUI()

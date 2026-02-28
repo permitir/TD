@@ -7,12 +7,12 @@ public class UpgradeHandler : MonoBehaviour, IPointerEnterHandler, IPointerExitH
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        UIManager.main.SetHoveringState(true);
+        UIManager.main.SetHoveringState(true); // Whenever mouse cursor enters UI, setting HoveringState as true
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        UIManager.main.SetHoveringState(false);
+        UIManager.main.SetHoveringState(false); // Whenever mouse cursor exits UI, setting HoveringState as false
     }
 
 }

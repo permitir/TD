@@ -141,25 +141,29 @@ public class MinigunTurret : BaseTurret
     public void Upgrade()
     {
         // What happens after user buys a turret/tower upgrade
-        if (UpgradeCalculator() > LevelManager.main.currency) return;
+        if (UpgradeCalculator() > LevelManager.main.currency)
+        {
+            StartCoroutine(LevelManager.main.ShowErrorTemporarily(1.5f));
+        } else
+        {
+            LevelManager.main.SpendCurrency(UpgradeCalculator());
+            totalMoneySpent += UpgradeCalculator();
+            UIManager.main.ClearCurrentTurret();
 
-        LevelManager.main.SpendCurrency(UpgradeCalculator());
-        totalMoneySpent += UpgradeCalculator();
-        UIManager.main.ClearCurrentTurret();
+            level++;
 
-        level++;
+            BPS = BPSCalculator();
+            targetingRange = RangeCalculator();
 
-        BPS = BPSCalculator();
-        targetingRange = RangeCalculator();
+            // Calculation to increase the max fire rate with upgrades
+            maxBPS = bpsBase * 8f * Mathf.Pow(level, 0.2f);
+            minBPS = bpsBase * Mathf.Pow(level, 0.2f);
 
-        // Calculation to increase the max fire rate with upgrades
-        maxBPS = bpsBase * 8f * Mathf.Pow(level, 0.2f);
-        minBPS = bpsBase * Mathf.Pow(level, 0.2f);
+            // Decrease the spin up time
+            spinUpTime = MathF.Max(0.5f, 2f - (level * 0.2f));
 
-        // Decrease the spin up time
-        spinUpTime = MathF.Max(0.5f, 2f - (level * 0.2f));
-
-        CloseUpgradeUI();
+            CloseUpgradeUI();
+        }
     }
 
      public void SellTurret()

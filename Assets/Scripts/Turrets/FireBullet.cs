@@ -38,19 +38,19 @@ public class FireBullet : MonoBehaviour
         if (enemyHealth != null)
         {
             // Initialise damage
-            enemyHealth.TakeDamage(initialDamage);
+            enemyHealth.TakeDamage(initialDamage); // deal immediate impact damage
 
             // Apply the burn
-            BurnEffect burnEffect = other.gameObject.GetComponent<BurnEffect>();
-            if (burnEffect == null)
+            BurnEffect burnEffect = other.gameObject.GetComponent<BurnEffect>(); // check if enemy already has a burn effect component
+            if (burnEffect == null) // if no burn component
             {
-                burnEffect = other.gameObject.AddComponent<BurnEffect>();
+                burnEffect = other.gameObject.AddComponent<BurnEffect>(); // add burn effect component
             }
 
-            burnEffect.ApplyBurn(burnDamage, burnDuration, burnTickRate);
+            burnEffect.ApplyBurn(burnDamage, burnDuration, burnTickRate); // apply burn damage over time to enemy
         }
 
-        Destroy(gameObject);
+        Destroy(gameObject); // destroy byllet after colliding
     }
 
     private void OnBecameInvisible()

@@ -105,8 +105,11 @@ public class Turret : BaseTurret
     public void Upgrade()
     {
         // What happens after user buys a turret/tower upgrade
-        if (UpgradeCalculator() > LevelManager.main.currency) return;
-
+        if (UpgradeCalculator() > LevelManager.main.currency)
+        {
+            StartCoroutine(LevelManager.main.ShowErrorTemporarily(1.5f));
+        } else
+        {
         LevelManager.main.SpendCurrency(UpgradeCalculator());
         totalMoneySpent += UpgradeCalculator();
         UIManager.main.ClearCurrentTurret();
@@ -117,6 +120,7 @@ public class Turret : BaseTurret
         targetingRange = RangeCalculator();
 
         CloseUpgradeUI();
+        }
     }
 
     public void SellTurret()

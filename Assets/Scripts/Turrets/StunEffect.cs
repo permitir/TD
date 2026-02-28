@@ -9,7 +9,7 @@ public class StunEffect : MonoBehaviour
 
     private void Awake()
     {
-        enemyMovement = GetComponent<EnemyMovement>();
+        enemyMovement = GetComponent<EnemyMovement>(); // Get enemy movement component
     }
 
     public void ApplyStun(float duration)
@@ -25,21 +25,21 @@ public class StunEffect : MonoBehaviour
 
     private IEnumerator StunEnemy(float duration)
     {
-        if (enemyMovement != null && !isStunned)
+        if (enemyMovement != null && !isStunned) 
         {
             isStunned = true;
             
             // Stop the enemy
-            enemyMovement.UpdateSpeed(0f);
-            GetComponent<SpriteRenderer>().color = Color.yellow;
+            enemyMovement.UpdateSpeed(0f); // set enemy speed to 0
+            GetComponent<SpriteRenderer>().color = Color.yellow; // change enemy colour to yellow
 
             // Wait for stun duration
             yield return new WaitForSeconds(duration);
 
             // Restore movement
-            enemyMovement.ResetSpeed();
-            GetComponent<SpriteRenderer>().color = Color.blue;
-            isStunned = false;
+            enemyMovement.ResetSpeed(); // reset enemy to their default speed
+            GetComponent<SpriteRenderer>().color = Color.blue; // set their colour to blue to show it has been stunned
+            isStunned = false; // no longer stunned
         }
     }
 

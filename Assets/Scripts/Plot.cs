@@ -6,15 +6,15 @@ public class Plot : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] private SpriteRenderer sr;
-    [SerializeField] private Color hoverColor;
+    [SerializeField] private Color hoverColour;
 
     public GameObject towerObj;
     public BaseTurret turret;
-    private Color startColor;
+    private Color startColour;
 
     private void Start()
     {
-        startColor = sr.color;
+        startColour = sr.color; // Default colours
     }
 
     private void OnMouseEnter()
@@ -22,18 +22,18 @@ public class Plot : MonoBehaviour
 
         if (!IsPointerOverUIElement())
         {
-            sr.color = hoverColor;
+            sr.color = hoverColour;
         }
         //Doesn't show hover colour if UI in the way
         if (!UIManager.main.IsPlacementBlocked())
         {
-            sr.color = hoverColor;
+            sr.color = hoverColour; // Placement isn't blocked, show hover colour
         }
     }
 
     private void OnMouseExit()
     {
-        sr.color = startColor;
+        sr.color = startColour; // Whenever mouse exists a plot it returns it to its starter colour
     }
 
     private void OnMouseDown()
@@ -43,7 +43,7 @@ public class Plot : MonoBehaviour
             return;
         }
 
-        //if there's already a tower placed, do nothing
+        //if there's already a tower placed, open upgrade menu
         if (towerObj != null)
         {
             turret.OpenUpgradeUI();

@@ -29,19 +29,19 @@ public class SettingsManager : MonoBehaviour
 
     public void ChangeMasterVolume()
     {
-        mainAudioMixer.SetFloat("Master", masterVol.value);
+        mainAudioMixer.SetFloat("Master", masterVol.value); // setting volume to float
         SaveSystem.instance.SetMasterVolume(masterVol.value); // saving
     }
 
     public void ChangeMusicVolume()
     {
-        mainAudioMixer.SetFloat("Music", musicVol.value);
+        mainAudioMixer.SetFloat("Music", musicVol.value); // setting volume to float
         SaveSystem.instance.SetMusicVolume(musicVol.value); // saving
     }
 
     public void ChangeSFXVolume()
     {
-        mainAudioMixer.SetFloat("SFX", sfxVol.value);
+        mainAudioMixer.SetFloat("SFX", sfxVol.value); // setting volume to float
         SaveSystem.instance.SetSFXVolume(sfxVol.value); // saving
 
     }

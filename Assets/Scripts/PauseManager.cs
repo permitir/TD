@@ -14,19 +14,19 @@ public class PauseManager : MonoBehaviour
 
     private void Start()
     {
-        if (pausePanel != null)
+        if (pausePanel != null) // Checking if panel exists
         {
-            pausePanel.SetActive(false);
+            pausePanel.SetActive(false); // Making sure pause panel is off at start
         }
-        if (pauseButton != null)
+        if (pauseButton != null) // Checking button panel exists
         {
             pauseButton.onClick.AddListener(PauseGame);
         }
-        if (continueButton != null)
+        if (continueButton != null) // Checking if button exists
         {
             continueButton.onClick.AddListener(ResumeGame);
         }
-        if (menuButton != null)
+        if (menuButton != null) // Checking if button exists
         {
             menuButton.onClick.AddListener(GoMainMenu);
         }
@@ -52,9 +52,9 @@ public class PauseManager : MonoBehaviour
         isPaused = true;
         Time.timeScale = 0f; //freeze time
 
-        if (pausePanel != null)
+        if (pausePanel != null) // Checking if panel exists
         {
-            pausePanel.SetActive(true);
+            pausePanel.SetActive(true); // Setting the panel to active
 
             Debug.Log("Game Paused by Player");
         }
@@ -65,9 +65,9 @@ public class PauseManager : MonoBehaviour
         isPaused = false;
         Time.timeScale = 1f; //reset back to normal time
 
-        if (pausePanel != null)
+        if (pausePanel != null) // Checking if panel exists
         {
-            pausePanel.SetActive(false);
+            pausePanel.SetActive(false); // Disabling panel
             Debug.Log("Game Resumed by Player");
         }
     }

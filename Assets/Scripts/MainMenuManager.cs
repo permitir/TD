@@ -13,6 +13,6 @@ public class MainMenuManager : MonoBehaviour
     public void MainMenu()
     {
         Time.timeScale = 1f; //Make sure timer is reset 
-        LevelManager.main.LoadMainMenu();
+        LevelManager.main.LoadMainMenu(); // Loading the main menu
     }   
 }

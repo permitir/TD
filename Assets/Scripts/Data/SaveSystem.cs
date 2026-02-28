@@ -41,29 +41,29 @@ public class SaveSystem : MonoBehaviour
     // Loads the game
     public void LoadGame()
     {
-        if (File.Exists(saveFilePath))
+        if (File.Exists(saveFilePath)) // check if a save file already exists
         {
-            string json = File.ReadAllText(saveFilePath);
-            currentData = JsonUtility.FromJson<GameData>(json);
+            string json = File.ReadAllText(saveFilePath); // Read the save file
+            currentData = JsonUtility.FromJson<GameData>(json); // convert JSON into GameData object
             Debug.Log("Game loaded! Highest level: " + currentData.highestLevelUnlocked);
         }
         else
         {
             // Creates new save file
-            Debug.Log("No save file found, creating new one");
-            currentData = new GameData();
-            SaveGame();
+            Debug.LogWarning("No save file found, creating new one"); // warn that no save file exists
+            currentData = new GameData(); // create fresh game data with default values
+            SaveGame(); // save the new data to create file
         }
     }
 
     // Delete save file (testing purpose)
     public void DeleteSave()
     {
-        if (File.Exists(saveFilePath))
+        if (File.Exists(saveFilePath)) // check if file exists
         {
-            File.Delete(saveFilePath);
+            File.Delete(saveFilePath); // delete the save file from disk
             Debug.Log("Save file deleted");
-            currentData = new GameData();
+            currentData = new GameData(); // reset to fresh game data
         }
     }
 
@@ -71,30 +71,30 @@ public class SaveSystem : MonoBehaviour
 
     public void UnlockLevel(int levelNumber)
     {
-        if (levelNumber > currentData.highestLevelUnlocked)
+        if (levelNumber > currentData.highestLevelUnlocked) // only unlock if this level is higher than current highest
         {
-            currentData.highestLevelUnlocked = levelNumber;
-            SaveGame();
-            Debug.Log("Level " + levelNumber + " unlocked");
+            currentData.highestLevelUnlocked = levelNumber; // update highest unlocked level
+            SaveGame(); // save progress to file
+            Debug.Log("Level " + levelNumber + " unlocked"); // logging
         }
     }
 
-     public bool IsLevelUnlocked(int levelNumber)
+    public bool IsLevelUnlocked(int levelNumber)
     {
-        return levelNumber <= currentData.highestLevelUnlocked;
+        return levelNumber <= currentData.highestLevelUnlocked; // return true if level number is unlocked. false if not
     }
 
     public int GetHighestLevelUnlocked()
     {
-        return currentData.highestLevelUnlocked;
+        return currentData.highestLevelUnlocked; // return highest level unlocked
     }
 
     public void CompleteLevel(int levelNumber)
     {
         // Will mark level as completed
-        if (levelNumber > 0 && levelNumber <= currentData.levelCompleted.Length)
+        if (levelNumber > 0 && levelNumber <= currentData.levelCompleted.Length) // check level number is valid
         {
-            currentData.levelCompleted[levelNumber - 1] = true;
+            currentData.levelCompleted[levelNumber - 1] = true; // mark this level as completed
         }
 
         // Unlock next level
@@ -107,22 +107,22 @@ public class SaveSystem : MonoBehaviour
     public bool IsLevelCompleted(int levelNumber)
     {
         if (levelNumber <= 0 || levelNumber > currentData.levelCompleted.Length)
-            return false;
+            return false; // return false if invalid level number
         
-        return currentData.levelCompleted[levelNumber - 1];
+        return currentData.levelCompleted[levelNumber - 1]; // return completion status
     }
 
     // Audio data
     
     public void SetMasterVolume(float volume)
     {
-        currentData.masterVolume = volume;
-        SaveGame();
+        currentData.masterVolume = volume; // update volume setting
+        SaveGame(); // save to file
     }
 
     public float GetMasterVolume()
     {
-        return currentData.masterVolume;
+        return currentData.masterVolume; // return current volume setting
     }
 
     public void SetMusicVolume(float volume)

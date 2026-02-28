@@ -50,23 +50,23 @@ public class MainMenu : MonoBehaviour
 
     public void Level2()
     {
-        int highestLevel = SaveSystem.instance.GetHighestLevelUnlocked();
+        int highestLevel = SaveSystem.instance.GetHighestLevelUnlocked(); // Getting the highest level unlocked as highestLevel
 
-        if (highestLevel >= 2)
+        if (highestLevel >= 2) // If highestLevel unlocked is greated than or equal to 2
         {
-            SceneManager.LoadScene("Level 2");
+            SceneManager.LoadScene("Level 2"); // Load level 2
             Debug.Log("Loading Scene Level 2");
         } 
         else
         {
             if (ErrorLoading != null)
-                StartCoroutine(ShowErrorTemporarily(3f)); // shows error for 5 seconds
+                StartCoroutine(ShowErrorTemporarily(3f)); // shows error for 3 seconds if not unlocked
         }
     }
 
     public void Level3()
     {
-        int highestLevel = SaveSystem.instance.GetHighestLevelUnlocked();
+        int highestLevel = SaveSystem.instance.GetHighestLevelUnlocked(); 
 
         if (highestLevel >= 3)
         {
@@ -76,7 +76,7 @@ public class MainMenu : MonoBehaviour
         else
         {
             if (ErrorLoading != null)
-                StartCoroutine(ShowErrorTemporarily(3f)); // shows error for 5 seconds
+                StartCoroutine(ShowErrorTemporarily(3f)); // shows error for 3 seconds
         }
     }
 

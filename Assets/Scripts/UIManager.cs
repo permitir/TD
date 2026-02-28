@@ -55,17 +55,17 @@ public class UIManager : MonoBehaviour
         return isHoveringUI || isHoveringShopUI || IsPointerOverUI();
     }
 
-    public void SetShopHoverState(bool state)
+    public void SetShopHoverState(bool state) // Setting state as hover
     {
         isHoveringShopUI = state;
     }
 
-    public void SetHoveringState(bool state)
+    public void SetHoveringState(bool state) // Setting state as hover
     {
         isHoveringUI = state;
     }
 
-    public bool isHovering()
+    public bool isHovering() // Check if hovering
     {
         return isHoveringUI || isHoveringShopUI;
     }

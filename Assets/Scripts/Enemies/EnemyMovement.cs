@@ -17,7 +17,7 @@ public class EnemyMovement : MonoBehaviour
     private void Start()
     {
         baseSpeed = moveSpeed;
-        target = LevelManager.main.path[pathIndex];
+        target = LevelManager.main.path[pathIndex]; // getting the path the enemy has to do
     }
 
     private void Update()
@@ -37,14 +37,14 @@ public class EnemyMovement : MonoBehaviour
             }
             else
             {
-                target = LevelManager.main.path[pathIndex];
+                target = LevelManager.main.path[pathIndex]; // if not at last waypoint keep moving
             }
         }
     }
 
     private void FixedUpdate()
     {
-        //Direction our enemy needs to go to 
+        // Updating the direction our enemy needs to go to 
         Vector2 direction = (target.position - transform.position).normalized; // Normalized so it only goes between 0-1
 
         rb.velocity = direction * moveSpeed;
