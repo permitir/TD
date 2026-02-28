@@ -21,6 +21,8 @@ public class MainMenu : MonoBehaviour
             GameObject saveSystemObj = new GameObject("SaveSystem");
             saveSystemObj.AddComponent<SaveSystem>();
         }
+
+        SaveSystem.instance.LoadGame();
     }
 
     public void PlayGame()

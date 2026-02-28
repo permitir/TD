@@ -94,7 +94,7 @@ public class EnemySpawner : MonoBehaviour
         if (LevelManager.main.isGameOver) yield break;
 
         // If current wave has a remainder of 0, start a boss wave (every 10 waves)
-        if (currentWave == 2)
+        if (currentWave % 10 == 0)
         {
             SpawnBoss();
             LevelManager.main.WaveTextUI(currentWave); //Updates counter once new wave starts
@@ -139,6 +139,7 @@ public class EnemySpawner : MonoBehaviour
         isSpawning = false;
         timeSinceLastSpawn = 0f;
         currentWave++;
+        LevelManager.main.WaveTextUI(currentWave); //Updates counter once new wave starts
 
         LevelManager.main.IncreaseCurrency(25 + (currentWave * 5)); // Reward user currency for making it past every wave
 

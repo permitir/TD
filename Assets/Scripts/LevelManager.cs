@@ -3,7 +3,6 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
 using System.Collections;
-using UnityEditor.Timeline;
 
 public class LevelManager : MonoBehaviour
 {
