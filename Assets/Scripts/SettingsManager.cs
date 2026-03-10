@@ -9,6 +9,11 @@ public class SettingsManager : MonoBehaviour
     public Slider masterVol, musicVol, sfxVol;
     public AudioMixer mainAudioMixer;
 
+    private void Start()
+    {
+        LoadAudioSettings();
+    }
+
     public void LoadAudioSettings()
     {
         // Get saved volumes from SaveSystem
